@@ -4,7 +4,7 @@ global.UsingTouchScreen = false;
 function GuiStruct() constructor {
 	static slide_page_number = -1;
 	static is_enabled = function() {
-		return slide_page_number == -1;
+		return slide_page_number == -1 && !instance_exists(obj_settings_panel);
 	}
 	static update_and_draw = function() {
 		show_slides();

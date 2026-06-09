@@ -3,7 +3,7 @@
 /// @DnDHash : 2B8059CF
 /// @DnDArgument : "soundid" "snd_bomb_explosion"
 /// @DnDSaveInfo : "soundid" "snd_bomb_explosion"
-audio_play_sound(snd_bomb_explosion, 0, 0, 1.0, undefined, 1.0);
+play_sfx(snd_bomb_explosion, 0, 0);
 
 /// @DnDAction : YoYo Games.Common.Variable
 /// @DnDVersion : 1

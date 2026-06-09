@@ -9,7 +9,7 @@ audio_stop_sound(missile_sound);
 /// @DnDHash : 1E88E7D7
 /// @DnDArgument : "soundid" "snd_missile_explode"
 /// @DnDSaveInfo : "soundid" "snd_missile_explode"
-audio_play_sound(snd_missile_explode, 0, 0, 1.0, undefined, 1.0);
+play_sfx(snd_missile_explode, 0, 0);
 
 /// @DnDAction : YoYo Games.Particles.Effect
 /// @DnDVersion : 1

@@ -4,7 +4,7 @@
 /// @DnDArgument : "target" "_snd_whistle"
 /// @DnDArgument : "soundid" "snd_bomb_drop_whistle"
 /// @DnDSaveInfo : "soundid" "snd_bomb_drop_whistle"
-_snd_whistle = audio_play_sound(snd_bomb_drop_whistle, 0, 0, 1.0, undefined, 1.0);
+_snd_whistle = play_sfx(snd_bomb_drop_whistle, 0, 0);
 
 /// @DnDAction : YoYo Games.Instances.Sprite_Scale
 /// @DnDVersion : 1

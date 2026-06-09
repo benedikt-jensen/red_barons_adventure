@@ -1,4 +1,6 @@
 global.music_volume = 1;
+global.sfx_volume = 1;
+global.master_volume = 1;
 
 enum BGMusicDefaultGain {
 	Fliegermarsch,
@@ -11,15 +13,30 @@ enum BGMusicDefaultGain {
 }
 
 function get_default_gain(music_index) {
+	var _mv = global.music_volume * global.master_volume;
 	switch (music_index) {
-		case BGMusicDefaultGain.Fliegermarsch: return 0.5 * global.music_volume;
-		case BGMusicDefaultGain.PreussensGloria: return 1 * global.music_volume;
-		case BGMusicDefaultGain.Epic: return 0.8 * global.music_volume;
-		case BGMusicDefaultGain.TheRedBaron: return 1.5 * global.music_volume;
-		case BGMusicDefaultGain.Defeat: return 0.8 * global.music_volume;
-		case BGMusicDefaultGain.Victory: return 0.8 * global.music_volume;
-		case BGMusicDefaultGain.MainMenu: return 1 * global.music_volume;
+		case BGMusicDefaultGain.Fliegermarsch: return 0.5 * _mv;
+		case BGMusicDefaultGain.PreussensGloria: return 1.0 * _mv;
+		case BGMusicDefaultGain.Epic: return 0.8 * _mv;
+		case BGMusicDefaultGain.TheRedBaron: return 1.5 * _mv;
+		case BGMusicDefaultGain.Defeat: return 0.8 * _mv;
+		case BGMusicDefaultGain.Victory: return 0.8 * _mv;
+		case BGMusicDefaultGain.MainMenu: return 1.0 * _mv;
 		default: return 0.25;
+	}
+}
+
+function play_sfx(snd, priority, loop) {
+	return audio_play_sound(snd, priority, loop, global.sfx_volume * global.master_volume);
+}
+
+function apply_audio_settings() {
+	if instance_exists(obj_controller) {
+		var _ctrl = obj_controller;
+		if audio_exists(_ctrl.bg_music) {
+			audio_sound_gain(_ctrl.bg_music,
+				_ctrl.music_on ? get_bg_music_default_gain(room) : 0, 0);
+		}
 	}
 }
 

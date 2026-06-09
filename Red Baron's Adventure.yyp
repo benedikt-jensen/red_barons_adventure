@@ -108,6 +108,8 @@
     {"id":{"name":"obj_restarter","path":"objects/obj_restarter/obj_restarter.yy",},},
     {"id":{"name":"obj_rock","path":"objects/obj_rock/obj_rock.yy",},},
     {"id":{"name":"obj_rotating_gun","path":"objects/obj_rotating_gun/obj_rotating_gun.yy",},},
+    {"id":{"name":"obj_settings_button","path":"objects/obj_settings_button/obj_settings_button.yy",},},
+    {"id":{"name":"obj_settings_panel","path":"objects/obj_settings_panel/obj_settings_panel.yy",},},
     {"id":{"name":"obj_shoot_button","path":"objects/obj_shoot_button/obj_shoot_button.yy",},},
     {"id":{"name":"obj_smoke_source","path":"objects/obj_smoke_source/obj_smoke_source.yy",},},
     {"id":{"name":"obj_splash","path":"objects/obj_splash/obj_splash.yy",},},

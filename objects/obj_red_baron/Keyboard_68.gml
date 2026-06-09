@@ -18,7 +18,7 @@ if(bullet_cooldown == 0)
 	/// @DnDParent : 2006DDFA
 	/// @DnDArgument : "soundid" "snd_gunshot"
 	/// @DnDSaveInfo : "soundid" "snd_gunshot"
-	audio_play_sound(snd_gunshot, 0, 0, 1.0, undefined, 1.0);
+	play_sfx(snd_gunshot, 0, 0);
 
 	/// @DnDAction : YoYo Games.Instances.Create_Instance
 	/// @DnDVersion : 1

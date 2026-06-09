@@ -11,6 +11,7 @@
     {"name":"inst_11278FE0","path":"rooms/room_main_menu/room_main_menu.yy",},
     {"name":"inst_1F27F3B7","path":"rooms/room_main_menu/room_main_menu.yy",},
     {"name":"inst_4C60CED7","path":"rooms/room_main_menu/room_main_menu.yy",},
+    {"name":"inst_settings_btn","path":"rooms/room_main_menu/room_main_menu.yy",},
     {"name":"inst_38B7D3D","path":"rooms/room_main_menu/room_main_menu.yy",},
     {"name":"inst_8AE33AF","path":"rooms/room_main_menu/room_main_menu.yy",},
     {"name":"inst_51CE0420","path":"rooms/room_main_menu/room_main_menu.yy",},
@@ -26,6 +27,7 @@
   "layers":[
     {"$GMRInstanceLayer":"","%Name":"part_foreground","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v1","%Name":"inst_1F27F3B7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_1F27F3B7","objectId":{"name":"obj_music_on_off","path":"objects/obj_music_on_off/obj_music_on_off.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2784.0,"y":704.0,},
+        {"$GMRInstance":"v1","%Name":"inst_settings_btn","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_settings_btn","objectId":{"name":"obj_settings_button","path":"objects/obj_settings_button/obj_settings_button.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":200.0,"y":32.0,},
         {"$GMRInstance":"v1","%Name":"inst_4C60CED7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4C60CED7","objectId":{"name":"obj_music_on_off","path":"objects/obj_music_on_off/obj_music_on_off.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":1290.0,"y":12.0,},
       ],"layers":[],"name":"part_foreground","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Instances","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[

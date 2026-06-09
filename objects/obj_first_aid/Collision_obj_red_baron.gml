@@ -3,7 +3,7 @@
 /// @DnDHash : 1AF9E877
 /// @DnDArgument : "soundid" "snd_first_aid"
 /// @DnDSaveInfo : "soundid" "snd_first_aid"
-audio_play_sound(snd_first_aid, 0, 0, 1.0, undefined, 1.0);
+play_sfx(snd_first_aid, 0, 0);
 
 /// @DnDAction : YoYo Games.Common.Apply_To
 /// @DnDVersion : 1

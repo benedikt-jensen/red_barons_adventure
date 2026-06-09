@@ -57,7 +57,7 @@ if (_goto_next_room) {
 	{
 		if(global.GUI.is_enabled())
 		{
-			audio_play_sound(snd_main_menu_click, 0, 0, 1.0, undefined, 1.0);
+			play_sfx(snd_main_menu_click, 0, 0);
 	
 				sprite_index = spr_start_button;
 				image_index = 0;

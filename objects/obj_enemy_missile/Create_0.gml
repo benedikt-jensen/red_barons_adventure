@@ -33,4 +33,4 @@ target_obj = undefined;
 /// @DnDArgument : "target" "missile_sound"
 /// @DnDArgument : "soundid" "snd_missile_launch"
 /// @DnDSaveInfo : "soundid" "snd_missile_launch"
-missile_sound = audio_play_sound(snd_missile_launch, 0, 0, 1.0, undefined, 1.0);
+missile_sound = play_sfx(snd_missile_launch, 0, 0);

@@ -11,7 +11,7 @@ if(__dnd_health <= 0)
 	/// @DnDParent : 4F25E5DA
 	/// @DnDArgument : "soundid" "snd_explosion_3"
 	/// @DnDSaveInfo : "soundid" "snd_explosion_3"
-	audio_play_sound(snd_explosion_3, 0, 0, 1.0, undefined, 1.0);
+	play_sfx(snd_explosion_3, 0, 0);
 
 	/// @DnDAction : YoYo Games.Common.Variable
 	/// @DnDVersion : 1

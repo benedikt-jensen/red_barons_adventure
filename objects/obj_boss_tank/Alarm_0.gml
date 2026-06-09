@@ -45,13 +45,13 @@ else
 	/// @DnDVersion : 1
 	/// @DnDHash : 2B7643A5
 	/// @DnDParent : 521010BD
-	/// @DnDArgument : "code" "/// @description Shoot$(13_10)$(13_10)var _x = gun_x + lengthdir_x(140,gun_direction) * image_xscale;$(13_10)var _y = gun_y + lengthdir_y(140,gun_direction) * image_yscale;$(13_10)var _bullet = instance_create_layer(_x,_y,layer,obj_enemy_bullet);$(13_10)audio_play_sound(snd_tank_gunshot,0,0)$(13_10)_bullet.direction= gun_direction;$(13_10)_bullet.speed = 15;$(13_10)_bullet.x_speed = 0//vel_x;$(13_10)_bullet.image_angle = gun_direction;"
+	/// @DnDArgument : "code" "/// @description Shoot$(13_10)$(13_10)var _x = gun_x + lengthdir_x(140,gun_direction) * image_xscale;$(13_10)var _y = gun_y + lengthdir_y(140,gun_direction) * image_yscale;$(13_10)var _bullet = instance_create_layer(_x,_y,layer,obj_enemy_bullet);$(13_10)play_sfx(snd_tank_gunshot, 0, 0)$(13_10)_bullet.direction= gun_direction;$(13_10)_bullet.speed = 15;$(13_10)_bullet.x_speed = 0//vel_x;$(13_10)_bullet.image_angle = gun_direction;"
 	/// @description Shoot
 	
 	var _x = gun_x + lengthdir_x(140,gun_direction) * image_xscale;
 	var _y = gun_y + lengthdir_y(140,gun_direction) * image_yscale;
 	var _bullet = instance_create_layer(_x,_y,layer,obj_enemy_bullet);
-	audio_play_sound(snd_tank_gunshot,0,0)
+	play_sfx(snd_tank_gunshot, 0, 0)
 	_bullet.direction= gun_direction;
 	_bullet.speed = 15;
 	_bullet.x_speed = 0//vel_x;
