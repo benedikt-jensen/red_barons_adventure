@@ -44,6 +44,9 @@
 # Ignore output directory (Compiled Game)
 */output/
 
+# Ignore tmp build/run directory
+/tmp/
+
 # Ignore temporary backups created by GMS2
 *.backup
 *.autosave
