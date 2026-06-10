@@ -67,6 +67,7 @@ if (room == room_mountains) {
 			0,c_white,0.5);
 		gpu_set_blendmode(bm_normal);
 		with(all) {
+			if (object_is_ancestor(object_index, obj_ui_parent) || object_is_ancestor(object_index, obj_ui_parent_1)) continue;
 			if (sprite_exists(sprite_index)) {
 				draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,0,c_black,1);
 			}
