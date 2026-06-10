@@ -25,6 +25,7 @@ fx_set_single_layer(_fx_underwater, true);
 // LEVEL CONFIG VARS
 
 // debug overlay variables
+global.level_progress = 0;
 global.level_progress_max = 3600;
 
 global.tree_spawn_mult  = 1.5;
