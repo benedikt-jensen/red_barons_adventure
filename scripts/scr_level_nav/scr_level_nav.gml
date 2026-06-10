@@ -5,9 +5,7 @@ function start_game() {
 
 	with(obj_controller) {
 		in_game = 1;
-	
-		alarm_set(0, 90);
-	
+
 		global.destroyed_airplanes = 0;
 	}
 }

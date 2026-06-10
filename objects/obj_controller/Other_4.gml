@@ -25,14 +25,13 @@ fx_set_single_layer(_fx_underwater, true);
 layer_set_fx("water", _fx_underwater);
 
 boss_spawned = false;
+global.enemy_spawn_ramp = global.enemy_spawn_ramp_start;
 fade_in(global.fade_in_duration);
 ambiente_sounds = [];
 
 global.destroyed_airplanes = 0
 global.prev_powerup_at = 0
 global.level_done = false;
-
-alarm[0] = random_range(30,90);
 
 if (in_game) {
 	if (!instance_exists(obj_red_baron)) {
@@ -86,9 +85,7 @@ if(room != room_last)
 	if(!(room == room_victory))
 	{
 		alarm_set(3, 30);
-	
+
 			alarm_set(4, 120);
-	
-			alarm_set(5, 500);
 	}
 }

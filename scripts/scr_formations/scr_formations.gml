@@ -60,15 +60,32 @@ function spawn_formation(_formation, _enemy_obj, _enemy_speed, _bottom, _top,
 	var _min_y = _top+_vertical_padding;
 	var _h = (_bottom-_vertical_padding) -_min_y;
 	for (var _i = 0; _i<array_length(_formation.y_arr); _i++) {
-		var _y = _min_y + _formation.y_arr[i] * _h;
-		var _time = (_mirror ? 1-_formation.time_arr[i] : _formation.time_arr[i]) * _duration; 
+		var _y = _min_y + _formation.y_arr[_i] * _h;
+		var _time = (_mirror ? 1-_formation.time_arr[_i] : _formation.time_arr[_i]) * _duration;
 		var _argv = [_enemy_obj,_y,_enemy_speed];
 		exec_delayed(spawn_at_y_with_speed,	_argv, _time);
 	}
 }
 
-function spawn_formation_centered(_formation, _enemy_obj, _duration, 
+function spawn_formation_centered(_formation, _enemy_obj, _duration,
 	_vertical_padding, _mirror=false) {
-	spawn_formation(_formation, _enemy_obj, 5, 
+	spawn_formation(_formation, _enemy_obj, 5,
 		global.y_limit, 0, _vertical_padding, _duration, _mirror);
+}
+
+function dbg_wave_button_data() {
+	// Options offered as "spawn wave" buttons in the debug overlay.
+	return [
+		{ label: "V3 Wave",   formation: "V3", duration: 30, padding: 100, mirror: false },
+		{ label: "V5 Wave",   formation: "V5", duration: 40, padding: 100, mirror: false },
+		{ label: "V9 Wave",   formation: "V9", duration: 60, padding: 100, mirror: false },
+		{ label: "V5 Mirror", formation: "V5", duration: 40, padding: 100, mirror: true  },
+	];
+}
+
+function dbg_wave_button_rect(_index, _px1, _py1) {
+	var _w = 123, _h = 28, _gap = 12;
+	var _x1 = _px1 + 6 + _index * (_w + _gap);
+	var _y1 = _py1 + 393;
+	return [_x1, _y1, _x1 + _w, _y1 + _h];
 }
