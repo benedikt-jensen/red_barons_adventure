@@ -11,7 +11,7 @@ if(room==room_grasslands)
 	/// @DnDArgument : "var" "random(10)"
 	/// @DnDArgument : "op" "1"
 	/// @DnDArgument : "value" "1"
-	if(random(10) < 1)
+	if(random(10) < 1 * global.plant_spawn_mult)
 	{
 		/// @DnDAction : YoYo Games.Common.Function_Call
 		/// @DnDVersion : 1
@@ -29,7 +29,7 @@ if(room==room_grasslands)
 	/// @DnDArgument : "var" "random(10)"
 	/// @DnDArgument : "op" "1"
 	/// @DnDArgument : "value" "1"
-	if(random(10) < 1)
+	if(random(10) < 1 * global.tree_spawn_mult)
 	{
 		/// @DnDAction : YoYo Games.Common.Function_Call
 		/// @DnDVersion : 1
@@ -50,7 +50,7 @@ if(room==room_grasslands)
 	/// @DnDArgument : "var" "random(6)"
 	/// @DnDArgument : "op" "1"
 	/// @DnDArgument : "value" "1"
-	if(random(6) < 1)
+	if(random(6) < 1 * global.rock_spawn_mult)
 	{
 		/// @DnDAction : YoYo Games.Common.Function_Call
 		/// @DnDVersion : 1

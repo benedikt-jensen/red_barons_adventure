@@ -1,1 +1,1 @@
-ground_speed = 6/3;
+ground_speed = 2;

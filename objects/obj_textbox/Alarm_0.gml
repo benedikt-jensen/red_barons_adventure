@@ -16,13 +16,14 @@ text_speed_al	= array_length_1d(text_speed[page])/2;
 effects_al		= array_length_1d(effects[page])/2;
 text_col_al		= array_length_1d(text_col[page])/2;
 
-if(portrait[page] == -1){
-	pos_x			= (gb_diff/2);
-	finishede_x		= pos_x + boxWidth - x_buffer;
-} else {
-	pos_x			= (gb_diff/2)+(portraitWidth/2);
-	finishede_x		= pos_x + boxWidth - x_buffer;
+if box_x1 < 0 {
+	if(portrait[page] == -1){
+		pos_x = (gb_diff/2);
+	} else {
+		pos_x = (gb_diff/2)+(portraitWidth/2);
+	}
 }
+finishede_x = pos_x + boxWidth - x_buffer;
 
 draw_set_font(font[page]);
 charSize = string_width("M");		//gets new charSize under current font

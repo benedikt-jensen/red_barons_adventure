@@ -41,6 +41,7 @@ function spawn_on_ground(obj_index, min_scale = 1, max_scale = 1) {
 	if (_isFront==true){
 		obj_id = instance_create_layer(0, 0, "plants_front", obj_index)
 		obj_id.distance = 1;
+		obj_id.scroll_speed = 6;
 		obj_id.image_xscale = _scale / obj_id.distance;
 		obj_id.image_yscale = _scale / obj_id.distance;
 		obj_id.x = room_width + obj_id.sprite_width / 2;
@@ -51,6 +52,7 @@ function spawn_on_ground(obj_index, min_scale = 1, max_scale = 1) {
 		var _tree_depth = layer_get_depth(layer_get_id("plants_back")) + _distance;
 		obj_id = instance_create_depth(0, 0, _tree_depth, obj_index)
 		obj_id.distance = _distance / 10;
+		obj_id.scroll_speed = 6 / obj_id.distance;
 		obj_id.image_xscale = _scale / obj_id.distance;
 		obj_id.image_yscale = _scale / obj_id.distance;
 		obj_id.x = room_width + obj_id.sprite_width / 2;

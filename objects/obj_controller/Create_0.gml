@@ -11,6 +11,12 @@ global.level_order = [room_sunset, room_grasslands, room_mountains];
 global.target_destroyed_enemies = [75, 75, 75];
 global.start_from_level = 0;
 global.start_from_boss = false;
+global.env_speed = 1;
+dbg_overlay = false;
+debug_slider_dragging = -1;
+global.tree_spawn_mult  = 1;
+global.rock_spawn_mult  = 1;
+global.plant_spawn_mult = 1;
 
 music_on = true;
 help = 0;

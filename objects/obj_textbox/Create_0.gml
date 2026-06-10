@@ -31,6 +31,14 @@ priority_snd_effect = 5;
 open_mouth_frame	= 1;	//You only need to change this if you are using animated sprites
 							//Set this to equal the frame where the mouth is OPEN for talking sprites
 
+// Textbox bounds in GUI pixels (upper-left to lower-right).
+// Set all four to position and size the box freely.
+// Leave as -1 to use the default auto-layout (centered, bottom of screen).
+box_x1 = -1;	// left edge
+box_y1 = -1;	// top edge
+box_x2 = -1;	// right edge
+box_y2 = -1;	// bottom edge
+
 //-----------Setup (LEAVE THIS STUFF)
 #region
 portrait_talk	= -1;
@@ -65,6 +73,22 @@ name_box_text_y = name_box_y + y_buffer;
 
 finishede_x		= pos_x + boxWidth - x_buffer;
 finishede_y		= pos_y + boxHeight - y_buffer;
+
+// Apply explicit corner bounds if provided
+if box_x1 >= 0 {
+	pos_x     = box_x1;
+	pos_y     = box_y1;
+	boxWidth  = box_x2 - box_x1;
+	boxHeight = box_y2 - box_y1;
+	finishede_x     = pos_x + boxWidth  - x_buffer;
+	finishede_y     = pos_y + boxHeight - y_buffer;
+	name_box_x      = pos_x + (8 * scale);
+	name_box_y      = pos_y - (23 * scale);
+	name_box_text_x = name_box_x + ((sprite_get_width(name_box) * scale) / 2);
+	name_box_text_y = name_box_y + y_buffer;
+}
+box_xscale = boxWidth  / sprite_get_width(dialogue_box);
+box_yscale = boxHeight / sprite_get_height(dialogue_box);
 
 letter			= 0;
 charCount		= 0;

@@ -64,3 +64,54 @@ if(in_game == 1)
 fade_in_out();
 
 // fade in/out
+
+if dbg_overlay {
+    var _gw = display_get_gui_width();
+    var _px1 = _gw - 370, _px2 = _gw - 10, _py1 = 10, _py2 = _py1 + 175;
+    var _sldr_x1 = _px1 + 105, _sldr_x2 = _px2 - 50;
+    var _sldr_y  = [_py1 + 45, _py1 + 80, _py1 + 115, _py1 + 150];
+    var _labels  = ["Env Speed", "Trees", "Rocks", "Grass"];
+    var _values  = [global.env_speed, global.tree_spawn_mult, global.rock_spawn_mult, global.plant_spawn_mult];
+    var _maxes   = [10, 10, 10, 10];
+
+    draw_set_alpha(0.8);
+    draw_set_color(c_black);
+    draw_rectangle(_px1, _py1, _px2, _py2, false);
+    draw_set_alpha(1);
+    draw_set_color(c_lime);
+    draw_rectangle(_px1, _py1, _px2, _py2, true);
+
+    draw_set_font(fnt_debug);
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_left);
+    draw_set_color(c_lime);
+    draw_text(_px1 + 6, _py1 + 18, "DEBUG  [F3 to toggle]");
+
+    for (var i = 0; i < 4; i++) {
+        var _y  = _sldr_y[i];
+        var _v  = _values[i];
+        var _m  = _maxes[i];
+        var _vx = _sldr_x1 + (_v / _m) * (_sldr_x2 - _sldr_x1);
+
+        draw_set_color(c_white);
+        draw_set_halign(fa_left);
+        draw_text(_px1 + 6, _y, _labels[i]);
+
+        draw_set_color(make_color_rgb(60, 60, 60));
+        draw_rectangle(_sldr_x1, _y - 4, _sldr_x2, _y + 4, false);
+
+        draw_set_color(c_lime);
+        if _v > 0 draw_rectangle(_sldr_x1, _y - 4, _vx, _y + 4, false);
+        draw_circle(_vx, _y, 7, false);
+
+        draw_set_color(c_white);
+        draw_set_halign(fa_right);
+        draw_text(_px2 - 6, _y, string_format(_v, 1, 2));
+    }
+
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+    draw_set_font(-1);
+}

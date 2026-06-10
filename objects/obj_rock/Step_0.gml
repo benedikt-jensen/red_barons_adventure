@@ -3,4 +3,4 @@
 /// @DnDHash : 7A4FF626
 /// @DnDArgument : "x" "-6/distance"
 /// @DnDArgument : "x_relative" "1"
-x += -6/distance;
+x -= scroll_speed * global.env_speed;

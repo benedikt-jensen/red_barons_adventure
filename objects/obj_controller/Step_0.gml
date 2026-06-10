@@ -58,13 +58,42 @@ if (_goto_next_room) {
 		if(global.GUI.is_enabled())
 		{
 			play_sfx(snd_main_menu_click, 0, 0);
-	
+
 				sprite_index = spr_start_button;
 				image_index = 0;
-	
+
 				alarm_set(1, global.fade_out_duration);
-	
+
 				script_execute(fade_out, global.fade_out_duration);
 		}
 	}
+}
+
+// Debug mode
+if keyboard_check_pressed(vk_f3) dbg_overlay = !dbg_overlay;
+if dbg_overlay {
+    var _gw = display_get_gui_width();
+    var _px1 = _gw - 370, _px2 = _gw - 10, _py1 = 10;
+    var _sldr_x1 = _px1 + 105, _sldr_x2 = _px2 - 50;
+    var _sldr_y = [_py1 + 45, _py1 + 80, _py1 + 115, _py1 + 150];
+    var _mx = device_mouse_x_to_gui(0), _my = device_mouse_y_to_gui(0);
+
+    if mouse_check_button_pressed(mb_left) && debug_slider_dragging == -1 {
+        for (var i = 0; i < 4; i++) {
+            if _mx >= _sldr_x1 && _mx <= _sldr_x2 && abs(_my - _sldr_y[i]) < 12 {
+                debug_slider_dragging = i;
+                break;
+            }
+        }
+    }
+    if mouse_check_button_released(mb_left) debug_slider_dragging = -1;
+    if debug_slider_dragging >= 0 {
+        var _t = clamp((_mx - _sldr_x1) / (_sldr_x2 - _sldr_x1), 0, 1);
+        switch (debug_slider_dragging) {
+            case 0: global.env_speed        = _t * 10; break;
+            case 1: global.tree_spawn_mult  = _t * 10; break;
+            case 2: global.rock_spawn_mult  = _t * 10; break;
+            case 3: global.plant_spawn_mult = _t * 10; break;
+        }
+    }
 }
