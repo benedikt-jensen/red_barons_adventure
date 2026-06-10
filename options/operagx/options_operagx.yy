@@ -1,5 +1,5 @@
 {
-  "$GMOperaGXOptions":"",
+  "$GMOperaGXOptions":"v1",
   "%Name":"operagx",
   "name":"operagx",
   "option_operagx_display_cursor":true,
@@ -17,13 +17,14 @@
   "option_operagx_mod_team_id":"",
   "option_operagx_mod_team_name":"",
   "option_operagx_mod_version":"1.0.0.0",
-  "option_operagx_next_version":"1.0.0.72",
+  "option_operagx_next_version":"1.0.0.74",
   "option_operagx_publicShareUrl":"https://gx.games/games/0s03pm/red-baron-s-adventure/",
   "option_operagx_scale":0,
   "option_operagx_team_id":"6f41d78e-5670-47d5-b741-3e7232f00423",
   "option_operagx_team_name":"bennijen studio",
   "option_operagx_texture_page":"2048x2048",
-  "option_operagx_version":"1.0.0.71",
+  "option_operagx_transparent_background":false,
+  "option_operagx_version":"1.0.0.73",
   "resourceType":"GMOperaGXOptions",
   "resourceVersion":"2.0",
 }

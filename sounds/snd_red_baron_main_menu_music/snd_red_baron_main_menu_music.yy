@@ -1,15 +1,17 @@
 {
-  "$GMSound":"",
+  "$GMSound":"v2",
   "%Name":"snd_red_baron_main_menu_music",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
   },
   "bitDepth":1,
-  "bitRate":128,
+  "channelFormat":0,
   "compression":1,
+  "compressionQuality":4,
   "conversionMode":0,
   "duration":55.657097,
+  "exportDir":"",
   "name":"snd_red_baron_main_menu_music",
   "parent":{
     "name":"bg_music",
@@ -20,6 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_red_baron_main_menu_music.ogg",
-  "type":0,
   "volume":0.5,
 }

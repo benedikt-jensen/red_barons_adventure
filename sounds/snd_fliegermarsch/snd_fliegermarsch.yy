@@ -1,15 +1,17 @@
 {
-  "$GMSound":"",
+  "$GMSound":"v2",
   "%Name":"snd_fliegermarsch",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
   },
   "bitDepth":1,
-  "bitRate":128,
+  "channelFormat":0,
   "compression":1,
+  "compressionQuality":4,
   "conversionMode":0,
-  "duration":147.93143,
+  "duration":147.8879,
+  "exportDir":"",
   "name":"snd_fliegermarsch",
   "parent":{
     "name":"bg_music",
@@ -20,6 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_fliegermarsch.mp3",
-  "type":0,
   "volume":0.25,
 }

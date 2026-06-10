@@ -13,7 +13,7 @@ cheat()
 spawn_env_objects()
 spawn_enemies()
 
-global.level_progress += 10;
+global.level_progress += 1;
 
 if (global.spawn_boss and !boss_spawned) {
 	global.spawn_boss = false;

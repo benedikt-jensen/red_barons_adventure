@@ -9,8 +9,8 @@
   "name":"obj_level_selector",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"buttons",
+    "path":"folders/Objects/GUI/buttons.yy",
   },
   "parentObjectId":null,
   "persistent":false,
