@@ -11,6 +11,23 @@ function GuiStruct() constructor {
 	}
 }
 
+function draw_progress_bar(_x1, _y1, _x2, _y2, _progress) {
+	draw_set_color(c_white);
+	var _r = (_y2 - _y1);
+	draw_roundrect_ext(_x1, _y1, _x2, _y2, _r, _r, false);
+
+	_x1 += 2; _y1 += 2; _x2 -= 2; _y2 -= 2;
+	draw_set_color(c_black);
+	var _r = (_y2 - _y1);
+	draw_roundrect_ext(_x1, _y1, _x2, _y2, _r, _r, false);
+
+	_x1 += 2; _y1 += 2; _x2 -= 2; _y2 -= 2;
+	draw_set_color(c_white);
+	var _fill_x2 = _x1 + (_x2 - _x1) * clamp(_progress, 0, 1);
+	var _r = (_y2 - _y1);
+	draw_roundrect_ext(_x1, _y1, _fill_x2, _y2, _r, _r, false);
+}
+
 function darken_on_hover(blend_color=#E0E0E0) {
 	if (collision_point(mouse_x,mouse_y,id,true,false))
 		image_blend = blend_color;

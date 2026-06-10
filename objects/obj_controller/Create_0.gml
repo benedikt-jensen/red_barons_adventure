@@ -1,5 +1,4 @@
 /// @description Setup
-global.show_destroyed_airplanes = false;
 global.difficulty_level = 2;
 global.prev_powerup_at = 0;
 global.cooldown_time = 120;
@@ -15,25 +14,11 @@ global.start_from_boss = false;
 global.env_speed = 2.5;
 dbg_overlay = false;
 debug_slider_dragging = -1;
-
-// debug overlay variables
-global.tree_spawn_mult  = 1.5;
+global.tree_spawn_mult  = 2;
 global.rock_spawn_mult  = 0.5;
-global.plant_spawn_mult = 15;
-
-global.plane_spawn_mult = 1;
-global.plane_speed_mult = 1.5;
-
-global.tank_spawn_mult  = 0.3;
+global.plant_spawn_mult = 10;
+global.plane_speed_mult = 1;
 global.tank_speed_mult  = 1;
-
-// Enemy spawn ramp - multiplies plane/tank spawn chances, rising from
-// _start to _max over the level (per-step rate), then holding at _max.
-// Resets to _start at the beginning of each level (see Other_4).
-global.enemy_spawn_ramp_start = 50;
-global.enemy_spawn_ramp_max   = 100;
-global.enemy_spawn_ramp_rate  = 0.015;
-global.enemy_spawn_ramp       = global.enemy_spawn_ramp_start;
 
 music_on = true;
 help = 0;

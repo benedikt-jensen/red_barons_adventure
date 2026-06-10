@@ -9,8 +9,8 @@
   "name":"obj_boss_on_off",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"buttons",
+    "path":"folders/Objects/GUI/buttons.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_level_selector",
-    "path":"sprites/spr_level_selector/spr_level_selector.yy",
+    "name":"spr_boss_button",
+    "path":"sprites/spr_boss_button/spr_boss_button.yy",
   },
   "spriteMaskId":null,
   "visible":true,
