@@ -1,1 +1,1 @@
-ground_speed = 4;
+ground_speed = env_speed_from_y(y);

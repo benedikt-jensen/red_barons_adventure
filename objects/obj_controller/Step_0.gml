@@ -73,13 +73,13 @@ if (_goto_next_room) {
 if keyboard_check_pressed(vk_f3) dbg_overlay = !dbg_overlay;
 if dbg_overlay {
     var _gw = display_get_gui_width();
-    var _px1 = _gw - 370, _px2 = _gw - 10, _py1 = 10;
-    var _sldr_x1 = _px1 + 105, _sldr_x2 = _px2 - 50;
-    var _sldr_y = [_py1 + 45, _py1 + 80, _py1 + 115, _py1 + 150];
+    var _px1 = _gw - 550, _px2 = _gw - 10, _py1 = 10;
+    var _sldr_x1 = _px1 + 190, _sldr_x2 = _px2 - 90;
+    var _sldr_y = [_py1 + 63, _py1 + 98, _py1 + 133, _py1 + 168, _py1 + 203, _py1 + 238];
     var _mx = device_mouse_x_to_gui(0), _my = device_mouse_y_to_gui(0);
 
     if mouse_check_button_pressed(mb_left) && debug_slider_dragging == -1 {
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 6; i++) {
             if _mx >= _sldr_x1 && _mx <= _sldr_x2 && abs(_my - _sldr_y[i]) < 12 {
                 debug_slider_dragging = i;
                 break;
@@ -93,7 +93,9 @@ if dbg_overlay {
             case 0: global.env_speed        = _t * 10; break;
             case 1: global.tree_spawn_mult  = _t * 10; break;
             case 2: global.rock_spawn_mult  = _t * 10; break;
-            case 3: global.plant_spawn_mult = _t * 10; break;
+            case 3: global.plant_spawn_mult = _t * 30; break;
+            case 4: global.plane_speed_mult = _t * 5;  break;
+            case 5: global.tank_speed_mult  = _t * 5;  break;
         }
     }
 }

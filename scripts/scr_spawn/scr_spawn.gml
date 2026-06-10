@@ -30,34 +30,42 @@ function spawn_random_powerup(x,y,possible_powerups) {
 	instance_create_layer(x,y,"Instances",possible_powerups[i]);
 }
 
-function spawn_on_ground(obj_index, min_scale = 1, max_scale = 1) {
-	var _isFront = false;
-	if random(2)<0.4 {
-		_isFront = true;
-	}
-	
-	var _scale = 0.6 * random_range(min_scale, max_scale);
-	
-	if (_isFront==true){
-		obj_id = instance_create_layer(0, 0, "plants_front", obj_index)
-		obj_id.distance = 1;
-		obj_id.scroll_speed = 6;
-		obj_id.image_xscale = _scale / obj_id.distance;
-		obj_id.image_yscale = _scale / obj_id.distance;
-		obj_id.x = room_width + obj_id.sprite_width / 2;
-		obj_id.y = 680;
-	} else {
+function env_speed_from_y(_y) {
+	// Shared y -> speed mapping: also used by obj_ground/obj_ground_middle/obj_ground_top
+	// to derive their ground_speed, so everything that moves with the environment
+	// is tied to the same y coordinate via one formula.
+	var _horizon_y = 635;
+	var _y_front   = 680;
+	return 6 * (_y - _horizon_y) / (_y_front - _horizon_y);
+}
 
-		var _distance = random_range(15,30)
-		var _tree_depth = layer_get_depth(layer_get_id("plants_back")) + _distance;
-		obj_id = instance_create_depth(0, 0, _tree_depth, obj_index)
-		obj_id.distance = _distance / 10;
-		obj_id.scroll_speed = 6 / obj_id.distance;
-		obj_id.image_xscale = _scale / obj_id.distance;
-		obj_id.image_yscale = _scale / obj_id.distance;
-		obj_id.x = room_width + obj_id.sprite_width / 2;
-		obj_id.y = 635 + 30 / obj_id.distance;
+function spawn_on_ground(obj_index, min_scale = 1, max_scale = 1) {
+	// Fixed lanes within the on-ground band (~646-680) - smaller y spawns objects
+	// floating above the ground. scroll_speed and scale both derive from y via
+	// env_speed_from_y(). Scale also gets extra randomization on top, since not
+	// every rock/tree/bush at the same distance is the same size.
+	var _lane_ys = [646.25, 652.1, 671, 680];
+	var _y = _lane_ys[irandom(array_length(_lane_ys) - 1)];
+	var _speed = env_speed_from_y(_y);
+	var _factor = _speed / 6;
+
+	var _scale = 0.6 * random_range(min_scale, max_scale) * random_range(_factor * 0.75, _factor * 1.25);
+
+	if (_factor >= 1) {
+		obj_id = instance_create_layer(0, 0, "plants_front", obj_index)
+	} else if (_factor >= 0.75) {
+		// behind the front lane, but still in front of planes/tanks (Instances, depth 300)
+		var _depth = layer_get_depth(layer_get_id("plants_front")) + 50;
+		obj_id = instance_create_depth(0, 0, _depth, obj_index)
+	} else {
+		var _depth = layer_get_depth(layer_get_id("plants_back")) + (1 - _factor) * 100;
+		obj_id = instance_create_depth(0, 0, _depth, obj_index)
 	}
+	obj_id.scroll_speed = _speed;
+	obj_id.image_xscale = _scale;
+	obj_id.image_yscale = _scale;
+	obj_id.x = room_width + obj_id.sprite_width / 2;
+	obj_id.y = _y;
 }
 
 function spawn_boss_tank() {	

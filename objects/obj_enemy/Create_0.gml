@@ -15,7 +15,7 @@ armour = 1*difficulty_multiplier();
 /// @DnDHash : 7D54AB2A
 /// @DnDArgument : "expr" "random_range(3, 7 )"
 /// @DnDArgument : "var" "object_speed"
-object_speed = random_range(3, 7 );
+object_speed = 5;
 
 /// @DnDAction : YoYo Games.Instance Variables.Set_Health
 /// @DnDVersion : 1

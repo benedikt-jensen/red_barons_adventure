@@ -36,7 +36,7 @@ if(__dnd_health <= 0)
 /// @DnDArgument : "x_relative" "1"
 /// @DnDArgument : "y" "0"
 /// @DnDArgument : "y_relative" "1"
-x += - object_speed;
+x += - object_speed * global.tank_speed_mult;
 y += 0;
 
 /// @DnDAction : YoYo Games.Common.If_Variable

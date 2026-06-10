@@ -40,6 +40,8 @@
     {"$GMFolder":"","%Name":"enemies","folderPath":"folders/Sprites/enemies.yy","name":"enemies","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"boss_ship","folderPath":"folders/Sprites/enemies/boss_ship.yy","name":"boss_ship","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"zeppelin","folderPath":"folders/Sprites/enemies/zeppelin.yy","name":"zeppelin","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"environment","folderPath":"folders/Sprites/environment.yy","name":"environment","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"grassland","folderPath":"folders/Sprites/environment/grassland.yy","name":"grassland","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"FC_DialogueSystem","folderPath":"folders/Sprites/FC_DialogueSystem.yy","name":"FC_DialogueSystem","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Multitouch","folderPath":"folders/Sprites/Multitouch.yy","name":"Multitouch","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tile Sets","folderPath":"folders/Tile Sets.yy","name":"Tile Sets","resourceType":"GMFolder","resourceVersion":"2.0",},
