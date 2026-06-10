@@ -10,6 +10,8 @@ if (lightning_is_hitting) {
 
 cheat()
 
+spawn_env_objects()
+
 if (global.spawn_boss and !boss_spawned) {
 	for (var i=0; i<=global.difficulty_level; i++) {
 		global.highest_unlocked_boss[i] 

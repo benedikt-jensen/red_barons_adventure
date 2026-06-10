@@ -14,10 +14,10 @@ global.start_from_boss = false;
 global.env_speed = 2.5;
 dbg_overlay = false;
 debug_slider_dragging = -1;
-global.tree_spawn_mult  = 2;
+global.tree_spawn_mult  = 1.5;
 global.rock_spawn_mult  = 0.5;
-global.plant_spawn_mult = 10;
-global.plane_speed_mult = 1;
+global.plant_spawn_mult = 15;
+global.plane_speed_mult = 2;
 global.tank_speed_mult  = 1;
 
 music_on = true;

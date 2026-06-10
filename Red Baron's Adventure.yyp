@@ -143,6 +143,7 @@
     {"id":{"name":"scr_controls","path":"scripts/scr_controls/scr_controls.yy",},},
     {"id":{"name":"scr_dialogue_setup","path":"scripts/scr_dialogue_setup/scr_dialogue_setup.yy",},},
     {"id":{"name":"scr_draw_curve","path":"scripts/scr_draw_curve/scr_draw_curve.yy",},},
+    {"id":{"name":"scr_env_obj_spawning","path":"scripts/scr_env_obj_spawning/scr_env_obj_spawning.yy",},},
     {"id":{"name":"scr_fade_in_out","path":"scripts/scr_fade_in_out/scr_fade_in_out.yy",},},
     {"id":{"name":"scr_formations","path":"scripts/scr_formations/scr_formations.yy",},},
     {"id":{"name":"scr_gui","path":"scripts/scr_gui/scr_gui.yy",},},

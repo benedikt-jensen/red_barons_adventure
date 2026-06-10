@@ -30,6 +30,11 @@ function spawn_random_powerup(x,y,possible_powerups) {
 	instance_create_layer(x,y,"Instances",possible_powerups[i]);
 }
 
+// Lane factors in [ENV_LANE_FREE_MIN, ENV_LANE_FREE_MAX] are reserved for
+// planes/tanks (Instances layer) - no env objects spawn there.
+#macro ENV_LANE_FREE_MIN 0.5
+#macro ENV_LANE_FREE_MAX 0.8
+
 function env_speed_from_y(_y) {
 	// Shared y -> speed mapping: also used by obj_ground/obj_ground_middle/obj_ground_top
 	// to derive their ground_speed, so everything that moves with the environment
@@ -39,24 +44,53 @@ function env_speed_from_y(_y) {
 	return 6 * (_y - _horizon_y) / (_y_front - _horizon_y);
 }
 
+function env_scale_from_y(_y) {
+	// Same shape as env_speed_from_y(): apparent size falls off linearly with
+	// distance from the horizon too, normalized to 1x at the front reference line.
+	var _horizon_y = 635;
+	var _y_front   = 680;
+	return (_y - _horizon_y) / (_y_front - _horizon_y);
+}
+
+function env_y_from_factor(_factor) {
+	// Inverse of env_scale_from_y(): turns a lane factor back into a y position.
+	var _horizon_y = 635;
+	var _y_front   = 680;
+	return _horizon_y + _factor * (_y_front - _horizon_y);
+}
+
+function env_lane_factors(_count = 5, _step = 0.5) {
+	// Lanes are evenly spaced in "distance" (1/factor) rather than in factor
+	// itself: since far-away y-pixels cover more real distance, back lanes
+	// (low factor) end up packed closer together than front lanes - a
+	// hyperbolic curve. Factors inside the free zone are skipped.
+	var _factors = [];
+	var _distance = 1;
+	while (array_length(_factors) < _count) {
+		var _factor = 1 / _distance;
+		if (_factor <= ENV_LANE_FREE_MIN || _factor >= ENV_LANE_FREE_MAX) {
+			array_push(_factors, _factor);
+		}
+		_distance += _step;
+	}
+	return _factors;
+}
+
 function spawn_on_ground(obj_index, min_scale = 1, max_scale = 1) {
-	// Fixed lanes within the on-ground band (~646-680) - smaller y spawns objects
-	// floating above the ground. scroll_speed and scale both derive from y via
-	// env_speed_from_y(). Scale also gets extra randomization on top, since not
-	// every rock/tree/bush at the same distance is the same size.
-	var _lane_ys = [646.25, 652.1, 671, 680];
-	var _y = _lane_ys[irandom(array_length(_lane_ys) - 1)];
+	// Lanes come from env_lane_factors(); scroll_speed and scale both derive
+	// from the lane's y via env_speed_from_y()/env_scale_from_y(). Scale also
+	// gets extra randomization on top, since not every rock/tree/bush at the
+	// same distance is the same size.
+	static _lane_factors = env_lane_factors();
+	var _factor = _lane_factors[irandom(array_length(_lane_factors) - 1)];
+	var _y = env_y_from_factor(_factor);
 	var _speed = env_speed_from_y(_y);
-	var _factor = _speed / 6;
+	var _scale_factor = env_scale_from_y(_y);
 
-	var _scale = 0.6 * random_range(min_scale, max_scale) * random_range(_factor * 0.75, _factor * 1.25);
+	var _scale = 0.6 * random_range(min_scale, max_scale) * random_range(_scale_factor * 0.75, _scale_factor * 1.25);
 
-	if (_factor >= 1) {
+	if (_factor >= ENV_LANE_FREE_MAX) {
 		obj_id = instance_create_layer(0, 0, "plants_front", obj_index)
-	} else if (_factor >= 0.75) {
-		// behind the front lane, but still in front of planes/tanks (Instances, depth 300)
-		var _depth = layer_get_depth(layer_get_id("plants_front")) + 50;
-		obj_id = instance_create_depth(0, 0, _depth, obj_index)
 	} else {
 		var _depth = layer_get_depth(layer_get_id("plants_back")) + (1 - _factor) * 100;
 		obj_id = instance_create_depth(0, 0, _depth, obj_index)
