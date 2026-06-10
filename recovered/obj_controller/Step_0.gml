@@ -8,14 +8,16 @@ if (lightning_is_hitting) {
 	lightning_intensity = max(0,lightning_intensity-0.03);
 }
 
-spawn_env_objects()
-spawn_enemies()
 cheat()
 
+spawn_env_objects()
+spawn_enemies()
+
 if (global.spawn_boss and !boss_spawned) {
+	global.spawn_boss = false;
 	for (var i=0; i<=global.difficulty_level; i++) {
-		global.highest_unlocked_boss[i] 
-			= max(array_get_index(global.level_order, room), 
+		global.highest_unlocked_boss[i]
+			= max(array_get_index(global.level_order, room),
 				global.highest_unlocked_boss[i]);
 	}
 	switch(room)
@@ -33,25 +35,28 @@ if (global.spawn_boss and !boss_spawned) {
 			break;
 	}
 	boss_spawned = true;
-} else {
+} else if (!boss_spawned) {
 	var _current_level = array_get_index(global.level_order, room);
-	if (_current_level != -1 && global.destroyed_airplanes >= global.target_destroyed_enemies[_current_level]) {
-		global.spawn_boss = true;
+	if (_current_level != -1) {
+		global.level_progress += 1;
+		if (global.level_progress >= global.level_progress_max) {
+			global.spawn_boss = true;
+		}
 	}
 }
 
-var _goto_next_room = keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_enter) 
+var _goto_next_room = keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_enter)
 	|| (global.UsingTouchScreen && mouse_check_button(mb_left) && room == room_game_over)
 if (_goto_next_room) {
 	if(room==room_game_over)
 	{
 		/// @description restart
-	
+
 		room_goto(room_main_menu);
 
 		game_over = 0;
 
-	
+
 	__dnd_health = real(100);
 	}
 
@@ -77,11 +82,11 @@ if dbg_overlay {
     var _gw = display_get_gui_width();
     var _px1 = _gw - 550, _px2 = _gw - 10, _py1 = 10;
     var _sldr_x1 = _px1 + 190, _sldr_x2 = _px2 - 90;
-    var _sldr_y = [_py1 + 63, _py1 + 98, _py1 + 133, _py1 + 168, _py1 + 203, _py1 + 238];
+    var _sldr_y = [_py1 + 63, _py1 + 98, _py1 + 133, _py1 + 168, _py1 + 203, _py1 + 238, _py1 + 273, _py1 + 308, _py1 + 343];
     var _mx = device_mouse_x_to_gui(0), _my = device_mouse_y_to_gui(0);
 
     if mouse_check_button_pressed(mb_left) && debug_slider_dragging == -1 {
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 9; i++) {
             if _mx >= _sldr_x1 && _mx <= _sldr_x2 && abs(_my - _sldr_y[i]) < 12 {
                 debug_slider_dragging = i;
                 break;
@@ -98,6 +103,20 @@ if dbg_overlay {
             case 3: global.plant_spawn_mult = _t * 30; break;
             case 4: global.plane_speed_mult = _t * 5;  break;
             case 5: global.tank_speed_mult  = _t * 5;  break;
+            case 6: global.plane_spawn_mult = _t * 10; break;
+            case 7: global.tank_spawn_mult  = _t * 10; break;
+            case 8: global.enemy_spawn_ramp = _t * global.enemy_spawn_ramp_max; break;
+        }
+    }
+
+    if mouse_check_button_pressed(mb_left) {
+        var _wave_buttons = dbg_wave_button_data();
+        for (var i = 0; i < array_length(_wave_buttons); i++) {
+            var _rect = dbg_wave_button_rect(i, _px1, _py1);
+            if _mx >= _rect[0] && _mx <= _rect[2] && _my >= _rect[1] && _my <= _rect[3] {
+                var _b = _wave_buttons[i];
+                spawn_formation_centered(global.formations[? _b.formation], obj_enemy, _b.duration, _b.padding, _b.mirror);
+            }
         }
     }
 }
