@@ -11,5 +11,5 @@ else
 }
 
 with(other) {
-	hp += -250 * damage_multiplier() / armour;
+	hp += -400 * damage_multiplier() / armour;
 }
