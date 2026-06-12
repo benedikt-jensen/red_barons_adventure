@@ -6,11 +6,15 @@ if(room==room_grasslands)
 	}
 }
 
+/// @description Spawn birds / balloons
+
 if(room==room_sunset)
 {
-	spawn_on_right_limit_y(obj_bird, 0, room_height*0.6);
+	// A flock (or loner) every ~4s on average, instead of a steady
+	// one-bird-per-second drip.
+	if (irandom(3) == 0) {
+		spawn_bird_flock();
+	}
 }
 
 alarm_set(3, 60);
-
-/// @description Spawn bird

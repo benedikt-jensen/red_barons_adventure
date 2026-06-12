@@ -182,6 +182,44 @@ function spawn_on_right_limit_y_depth(_enemy_type, _y_min, _y_max, _at_depth) {
 	return _inst;
 }
 
+function spawn_bird_flock() {
+	// Either a lone bird or a loose V formation. All members share one
+	// distance band, air current (wave_seed) and base speed, so the flock
+	// undulates along the same path; tiny per-bird jitter keeps it organic.
+	var _count  = (irandom(3) == 0) ? 1 : irandom_range(3, 7);
+	var _dist   = random_range(1, 3);
+	var _seed   = random(256);
+	var _speed  = random_range(4.2, 5.5);
+	var _base_y = random_range(room_height * 0.08, room_height * 0.55);
+	var _amp    = random_range(20, 45);
+	var _freq   = 1 / random_range(500, 900);
+	var _gap_x  = 55 / _dist;
+	var _gap_y  = 22 / _dist;
+
+	for (var i = 0; i < _count; i++) {
+		var _bird = instance_create_layer(0, 0, "Instances", obj_bird);
+		// Re-band into the flock's distance (undo the depth offset the
+		// Create event applied for its own random distance)
+		_bird.depth         -= _bird.distance;
+		_bird.distance       = _dist * random_range(0.97, 1.03);
+		_bird.depth         += _bird.distance;
+		_bird.wave_seed      = _seed;
+		_bird.wave_amplitude = _amp;
+		_bird.wave_freq      = _freq;
+		_bird.flight_speed   = _speed * random_range(0.98, 1.02);
+		_bird.image_xscale   = 0.4 / _bird.distance;
+		_bird.image_yscale   = 0.4 / _bird.distance;
+
+		// Leader in front (leftmost), followers trailing in two diagonal
+		// lines: bird i sits (i+1) div 2 slots back-and-out, alternating sides.
+		var _slot = (i + 1) div 2;
+		var _side = (i mod 2 == 0) ? 1 : -1;
+		_bird.x = room_width + _bird.sprite_width / 2
+			+ i * _gap_x + random_range(-8, 8);
+		_bird.y = _base_y + _side * _slot * _gap_y + random_range(-6, 6);
+	}
+}
+
 // --- Effects ---------------------------------------------------------------
 
 function spawn_explosion(_x, _y) {
