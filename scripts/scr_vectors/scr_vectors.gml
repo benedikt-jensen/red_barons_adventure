@@ -1,5 +1,5 @@
-// Skriptelemente wurden für v2.3.0 geändert, weitere Informationen sind unter
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 verfügbar
+// Array-based 2D vector helpers ([x, y]). Used by scr_lighting; for a
+// struct-based alternative with more operations see Vec2 in scr_util.
 
 function v_mag(vector2) {
 	return sqrt(sqr(abs(vector2[0]))+sqr(abs(vector2[1])))

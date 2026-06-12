@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"Red Baron's Adventure",
   "AudioGroups":[
-    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -143,6 +143,7 @@
     {"id":{"name":"reset_dialogue_defaults","path":"scripts/reset_dialogue_defaults/reset_dialogue_defaults.yy",},},
     {"id":{"name":"scr_cheat_codes","path":"scripts/scr_cheat_codes/scr_cheat_codes.yy",},},
     {"id":{"name":"scr_controls","path":"scripts/scr_controls/scr_controls.yy",},},
+    {"id":{"name":"scr_debug_overlay","path":"scripts/scr_debug_overlay/scr_debug_overlay.yy",},},
     {"id":{"name":"scr_dialogue_setup","path":"scripts/scr_dialogue_setup/scr_dialogue_setup.yy",},},
     {"id":{"name":"scr_draw_curve","path":"scripts/scr_draw_curve/scr_draw_curve.yy",},},
     {"id":{"name":"scr_enemy_spawning","path":"scripts/scr_enemy_spawning/scr_enemy_spawning.yy",},},

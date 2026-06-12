@@ -73,23 +73,3 @@ function spawn_formation_centered(_formation, _enemy_obj, _duration,
 		global.y_limit, 0, _vertical_padding, _duration, _mirror);
 }
 
-function dbg_wave_button_data() {
-	// Options offered as "spawn wave" buttons in the debug overlay.
-	return [
-		{ label: "V3 Wave",   formation: "V3", duration: 30, padding: 100, mirror: false },
-		{ label: "V5 Wave",   formation: "V5", duration: 40, padding: 100, mirror: false },
-		{ label: "V9 Wave",   formation: "V9", duration: 60, padding: 100, mirror: false },
-		{ label: "V5 Mirror", formation: "V5", duration: 40, padding: 100, mirror: true  },
-	];
-}
-
-function dbg_wave_button_rect(_index, _px1, _py1) {
-	// 2-column grid below the "Spawn Wave" header. fnt_debug glyphs are
-	// 16x32, so buttons must fit a 9-char label (144px) plus padding.
-	var _w = 258, _h = 34, _gap = 12;
-	var _col = _index mod 2;
-	var _row = _index div 2;
-	var _x1 = _px1 + 6 + _col * (_w + _gap);
-	var _y1 = _py1 + 404 + _row * (_h + _gap);
-	return [_x1, _y1, _x1 + _w, _y1 + _h];
-}

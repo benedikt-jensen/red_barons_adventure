@@ -33,7 +33,7 @@ armour = 80; // *difficulty_multiplier();
 
 max_speed_mag = 4;
 
-__dnd_health = real(100);
+hp = 100;
 
 image_xscale = 0.8;
 image_yscale = 0.8;

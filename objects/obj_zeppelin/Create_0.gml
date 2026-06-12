@@ -6,7 +6,7 @@ image_xscale = 0.85;
 image_yscale = 0.85;
 
 armour = 160;
-__dnd_health = real(100);
+hp = 100;
 
 spawn_x_pos = x;
 normal_x_pos = room_width - sprite_width / 2 ;

@@ -99,8 +99,7 @@ if(y_movement == 0)
 image_angle = tilt_angle;
 
 with(obj_controller) {
-	if(!variable_instance_exists(id, "__dnd_health")) __dnd_health = 0;
-	if(__dnd_health <= 0)
+	if(hp <= 0)
 	{
 		with(other) instance_destroy();
 	}

@@ -3,8 +3,7 @@ function damage_player(_amount, _cooldown) {
 		if damage_cooldown > 0 { return; }
 		damage_cooldown = _cooldown;
 		with(obj_controller) {
-			if(!variable_instance_exists(id, "__dnd_health")) __dnd_health = 0;
-			__dnd_health += real(-_amount * difficulty_multiplier() / other.armour);
+			hp += -_amount * difficulty_multiplier() / other.armour;
 		}
 	}
 }

@@ -15,7 +15,7 @@ function next_level_or_restart() {
 		return_to_main_menu();;
 	} else {
 		room_goto_next();
-		obj_controller.__dnd_health = 100;
+		obj_controller.hp = 100;
 	}
 }
 

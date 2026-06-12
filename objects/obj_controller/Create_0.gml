@@ -24,7 +24,7 @@ global.tank_speed_mult  = 1;
 music_on = true;
 help = 0;
 game_over = 0;
-__dnd_health = 100;
+hp = 100;
 in_game = 0;
 
 // Create Sunset Filter Surface

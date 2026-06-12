@@ -58,7 +58,7 @@ if (laser_on) {
 		if instance_exists(obj_red_baron) {
 			if (collision_line(laser_gun_x, laser_gun_y, _x, _y, obj_red_baron, true, true)) {
 				var _damage = laser_damage / obj_red_baron.armour * difficulty_multiplier();
-				obj_controller.__dnd_health = max(0,obj_controller.__dnd_health-_damage)
+				obj_controller.hp = max(0,obj_controller.hp-_damage)
 				break;
 			}
 		}

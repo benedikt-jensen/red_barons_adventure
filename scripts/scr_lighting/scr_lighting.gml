@@ -18,8 +18,8 @@ function draw_light_laser(filter_surface) {
 			for (var i = 0; i<1; i++) {
 				var intensity = i==1 ? 0.5 : 1;
 				var blendmode = i==0 ? bm_subtract : bm_add;
-				var col = i==0 ? c_white : c_white
-				if (room=room_sunset) {
+				var col = c_white;
+				if (room == room_sunset) {
 					continue;
 				}
 				if (i==0) {
@@ -29,10 +29,10 @@ function draw_light_laser(filter_surface) {
 			
 				// var target_length = laser_end_x - laser_start_x + sprite_get_width(spr_light_circle);
 				// var x_scale = target_length / sprite_get_width(spr_light_circle);
-				draw_sprite_ext(spr_light_circle,0,askdjghkajg,y,1.5,1.5,0,col,intensity * (perlin_noise(current_time/300)+1)/4);
+				draw_sprite_ext(spr_light_circle,0,laser_start_x,y,1.5,1.5,0,col,intensity * (perlin_noise(current_time/300)+1)/4);
 				draw_sprite_ext(spr_light_circle,0,laser_end_x,y,2,2,0,col,intensity * (perlin_noise(current_time/300)+1)/4);
 			
-				var xx = askdjghkajg;
+				var xx = laser_start_x;
 				while(xx < laser_end_x) {
 					draw_sprite_ext(spr_light_circle,0,xx,y,0.4,0.4,0,col,intensity * (perlin_noise(current_time/300)+1)/2);
 					xx += 30;
