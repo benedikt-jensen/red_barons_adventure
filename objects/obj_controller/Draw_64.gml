@@ -91,7 +91,10 @@ fade_in_out();
 
 if dbg_overlay {
     var _gw = display_get_gui_width();
-    var _px1 = _gw - 550, _px2 = _gw - 10, _py1 = 10, _py2 = _py1 + 435;
+    var _px1 = _gw - 550, _px2 = _gw - 10, _py1 = 10;
+    var _wave_buttons = dbg_wave_button_data();
+    var _last_rect = dbg_wave_button_rect(array_length(_wave_buttons) - 1, _px1, _py1);
+    var _py2 = _last_rect[3] + 8;
     var _sldr_x1 = _px1 + 190, _sldr_x2 = _px2 - 90;
     var _sldr_y  = [_py1 + 63, _py1 + 98, _py1 + 133, _py1 + 168, _py1 + 203, _py1 + 238, _py1 + 273, _py1 + 308, _py1 + 343];
     var _labels  = ["Env Speed", "Trees", "Rocks", "Grass", "Plane Speed", "Tank Speed", "Plane Spawn", "Tank Spawn", "Spawn Ramp"];
@@ -139,7 +142,6 @@ if dbg_overlay {
     draw_set_valign(fa_top);
     draw_text(_px1 + 6, _py1 + 367, "Spawn Wave");
 
-    var _wave_buttons = dbg_wave_button_data();
     for (var i = 0; i < array_length(_wave_buttons); i++) {
         var _rect = dbg_wave_button_rect(i, _px1, _py1);
         var _hover = (_mx >= _rect[0] && _mx <= _rect[2] && _my >= _rect[1] && _my <= _rect[3]);

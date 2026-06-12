@@ -84,8 +84,12 @@ function dbg_wave_button_data() {
 }
 
 function dbg_wave_button_rect(_index, _px1, _py1) {
-	var _w = 123, _h = 28, _gap = 12;
-	var _x1 = _px1 + 6 + _index * (_w + _gap);
-	var _y1 = _py1 + 393;
+	// 2-column grid below the "Spawn Wave" header. fnt_debug glyphs are
+	// 16x32, so buttons must fit a 9-char label (144px) plus padding.
+	var _w = 258, _h = 34, _gap = 12;
+	var _col = _index mod 2;
+	var _row = _index div 2;
+	var _x1 = _px1 + 6 + _col * (_w + _gap);
+	var _y1 = _py1 + 404 + _row * (_h + _gap);
 	return [_x1, _y1, _x1 + _w, _y1 + _h];
 }
