@@ -45,10 +45,10 @@ global.enemy_spawn_ramp_max   = 100;
 global.enemy_spawn_ramp       = global.enemy_spawn_ramp_start;
 
 if (room == room_sunset) {
-	global.plane_spawn_mult = 1.5;
+	global.plane_spawn_mult = 2.5;
 } else if (room == room_grasslands) {
 } else if (room == room_mountains) {
-	global.plane_spawn_mult = 2;
+	global.plane_spawn_mult = 3;
 }
 
 global.enemy_spawn_ramp_rate  = (global.enemy_spawn_ramp_max - global.enemy_spawn_ramp) / global.level_progress_max;
