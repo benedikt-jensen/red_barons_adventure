@@ -11,6 +11,11 @@ if (room == room_sunset) {
 		draw_clear_alpha(c_black, 0.1);
 
 		with(obj_filter_parent) {
+			// Birds bake their dusk tint into image_blend instead (see
+			// obj_bird.apply_distance): stamping them here would darken
+			// anything their silhouette overlaps, casting fake shadows
+			// onto objects in front of them.
+			if (object_index == obj_bird) continue;
 			draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_black, 0.9);
 		}
 
