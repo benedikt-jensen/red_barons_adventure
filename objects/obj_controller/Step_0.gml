@@ -68,22 +68,29 @@ if (_goto_next_room) {
 if keyboard_check_pressed(vk_f3) dbg_overlay = !dbg_overlay;
 if dbg_overlay {
     var _panel = dbg_panel_layout();
-    var _sliders = dbg_slider_defs();
+    var _rows = dbg_overlay_rows().rows;
     var _mx = device_mouse_x_to_gui(0), _my = device_mouse_y_to_gui(0);
 
-    if mouse_check_button_pressed(mb_left) && debug_slider_dragging == -1 {
-        for (var i = 0; i < array_length(_sliders); i++) {
-            if _mx >= _panel.slider_x1 && _mx <= _panel.slider_x2 && abs(_my - dbg_slider_y(i, _panel.y1)) < 12 {
-                debug_slider_dragging = i;
+    if mouse_check_button_pressed(mb_left) && debug_slider_dragging == undefined {
+        for (var i = 0; i < array_length(_rows); i++) {
+            var _row = _rows[i];
+            var _ry = _panel.y1 + _row.y;
+            if (_row.kind == "header") {
+                // Click a group header to collapse/expand it
+                if (_mx >= _panel.x1 && _mx <= _panel.x2 && abs(_my - _ry) < 14) {
+                    dbg_group_toggle(_row.title);
+                    break;
+                }
+            } else if (_mx >= _panel.slider_x1 && _mx <= _panel.slider_x2 && abs(_my - _ry) < 12) {
+                debug_slider_dragging = _row.def;
                 break;
             }
         }
     }
-    if mouse_check_button_released(mb_left) debug_slider_dragging = -1;
-    if debug_slider_dragging >= 0 {
+    if mouse_check_button_released(mb_left) debug_slider_dragging = undefined;
+    if debug_slider_dragging != undefined {
         var _t = clamp((_mx - _panel.slider_x1) / (_panel.slider_x2 - _panel.slider_x1), 0, 1);
-        var _slider = _sliders[debug_slider_dragging];
-        _slider.set(_t * _slider.max);
+        debug_slider_dragging.set(_t * debug_slider_dragging.max);
     }
 
     if mouse_check_button_pressed(mb_left) {

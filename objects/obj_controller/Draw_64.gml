@@ -57,7 +57,7 @@ fade_in_out();
 // Debug overlay (input handling lives in the Step event)
 if dbg_overlay {
 	var _panel = dbg_panel_layout();
-	var _sliders = dbg_slider_defs();
+	var _rows = dbg_overlay_rows().rows;
 	var _wave_buttons = dbg_wave_button_data();
 	var _mx = device_mouse_x_to_gui(0), _my = device_mouse_y_to_gui(0);
 
@@ -74,9 +74,21 @@ if dbg_overlay {
 	draw_set_color(c_lime);
 	draw_text(_panel.x1 + 6, _panel.y1 + 18, "DEBUG  [F3 to toggle]");
 
-	for (var i = 0; i < array_length(_sliders); i++) {
-		var _slider = _sliders[i];
-		var _y  = dbg_slider_y(i, _panel.y1);
+	for (var i = 0; i < array_length(_rows); i++) {
+		var _row = _rows[i];
+		var _y = _panel.y1 + _row.y;
+
+		if (_row.kind == "header") {
+			// Collapsible group header: [-] expanded, [+] collapsed
+			var _hover = (_mx >= _panel.x1 && _mx <= _panel.x2 && abs(_my - _y) < 14);
+			draw_set_halign(fa_left);
+			draw_set_color(_hover ? c_white : c_lime);
+			draw_text(_panel.x1 + 6, _y,
+				(dbg_group_expanded(_row.title) ? "[-] " : "[+] ") + _row.title);
+			continue;
+		}
+
+		var _slider = _row.def;
 		var _v  = _slider.get();
 		var _vx = _panel.slider_x1 + (_v / _slider.max) * (_panel.slider_x2 - _panel.slider_x1);
 

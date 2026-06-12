@@ -89,6 +89,7 @@
     {"id":{"name":"obj_filter_parent","path":"objects/obj_filter_parent/obj_filter_parent.yy",},},
     {"id":{"name":"obj_fire_bullets_powerup","path":"objects/obj_fire_bullets_powerup/obj_fire_bullets_powerup.yy",},},
     {"id":{"name":"obj_first_aid","path":"objects/obj_first_aid/obj_first_aid.yy",},},
+    {"id":{"name":"obj_flock","path":"objects/obj_flock/obj_flock.yy",},},
     {"id":{"name":"obj_ground_middle","path":"objects/obj_ground_middle/obj_ground_middle.yy",},},
     {"id":{"name":"obj_ground_top","path":"objects/obj_ground_top/obj_ground_top.yy",},},
     {"id":{"name":"obj_ground","path":"objects/obj_ground/obj_ground.yy",},},

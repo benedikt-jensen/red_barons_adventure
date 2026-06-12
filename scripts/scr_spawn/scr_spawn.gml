@@ -187,58 +187,91 @@ function spawn_bird_flock() {
 	// one distance band, air current (wave_seed) and base speed, so the
 	// whole flock undulates along the same path; per-bird flutter, flap
 	// phase and slight speed differences keep it organic.
-	var _big    = (irandom(7) == 0); // rare: large far-away flock
-	var _count  = _big ? irandom_range(9, 13)
-		: ((irandom(3) == 0) ? 1 : irandom_range(3, 7));
-	var _dist   = _big ? random_range(2.2, 3) : random_range(1, 3);
-	var _shape  = choose("v", "line", "cluster");
-	var _seed   = random(256);
-	var _speed  = random_range(4.2, 5.5);
-	var _base_y = random_range(room_height * 0.08, room_height * 0.55);
-	var _amp    = random_range(20, 45);
-	var _freq   = 1 / random_range(500, 900);
-	var _breathe_seed = random(256);
-	var _gap_x  = 55 / _dist;
-	var _gap_y  = 22 / _dist;
-	var _line_side = choose(-1, 1);
+	// Rare: a "kettle" - birds soaring in circles on a thermal, slowly
+	// drifting across the sky in the far background.
+	if (irandom(5) == 0) {
+		var _kdist  = random_range(1.8, 3);
+		var _kcount = irandom_range(4, 12);
+		var _kx     = room_width + 120;
+		var _ky     = random_range(room_height * 0.12, room_height * 0.4);
+		var _kseed  = random(256);
+		var _kspeed = random_range(0.9, 1.4);
+		for (var i = 0; i < _kcount; i++) {
+			var _kb = instance_create_layer(0, 0, "Instances", obj_bird);
+			_kb.depth      -= _kb.distance;
+			_kb.distance    = _kdist * random_range(0.97, 1.03);
+			_kb.depth      += _kb.distance;
+			_kb.apply_distance();
+			_kb.mode        = "kettle";
+			_kb.wave_seed   = _kseed;
+			_kb.center_x    = _kx + random_range(-25, 25);
+			_kb.center_y    = _ky + random_range(-20, 20);
+			_kb.orbit_r     = random_range(55, 85) / _kb.distance;
+			_kb.orbit_phase = random(360);
+			_kb.orbit_speed = _kspeed * random_range(0.95, 1.05);
+			_kb.x           = _kb.center_x + lengthdir_x(_kb.orbit_r, _kb.orbit_phase);
+			_kb.y           = _kb.center_y;
+		}
+		return;
+	}
+
+	// Weighted size variety: loners and pairs are common, mid-size groups
+	// the norm, big skeins rare.
+	var _roll = random(1);
+	var _count;
+	if (_roll < 0.22)      _count = 1;
+	else if (_roll < 0.42) _count = 2;
+	else if (_roll < 0.72) _count = irandom_range(3, 5);
+	else if (_roll < 0.92) _count = irandom_range(6, 9);
+	else                   _count = irandom_range(10, 15);
+
+	// A lone hunter flies its own noise path (and may dive)
+	if (_count == 1) {
+		var _lone = instance_create_layer(0, 0, "Instances", obj_bird);
+		_lone.can_dive = true;
+		_lone.x = room_width + _lone.sprite_width / 2;
+		_lone.y = random_range(room_height * 0.08, room_height * 0.55);
+		return;
+	}
+
+	// Otherwise a flock with a brain: an invisible obj_flock owns the path
+	// and formation, and the members steer toward their slots - so the brain
+	// can morph formations or change altitude mid-flight and the birds swoop
+	// into place on their own. Big flocks sit in the far bands and pack a
+	// little tighter so the formation still fits on screen.
+	var _dist = (_count >= 10) ? random_range(2, 3) : random_range(1, 3);
+
+	var _brain = instance_create_depth(0, 0, 0, obj_flock);
+	_brain.distance     = _dist;
+	_brain.flight_speed = random_range(4.2, 5.5);
+	_brain.center_x     = room_width + 150;
+	_brain.base_y       = random_range(room_height * 0.08, room_height * 0.55);
+	var _pack = (_count >= 10) ? 0.65 : 1; // tighter spacing for big flocks
+	_brain.gap_x        = 55 * _pack / _dist;
+	_brain.gap_y        = 22 * _pack / _dist;
+	_brain.set_formation(choose("v", "line", "cluster"));
 
 	for (var i = 0; i < _count; i++) {
 		var _bird = instance_create_layer(0, 0, "Instances", obj_bird);
 		// Re-band into the flock's distance (undo the depth offset the
 		// Create event applied for its own random distance)
-		_bird.depth         -= _bird.distance;
-		_bird.distance       = _dist * random_range(0.97, 1.03);
-		_bird.depth         += _bird.distance;
+		_bird.depth       -= _bird.distance;
+		_bird.distance     = _dist * random_range(0.97, 1.03);
+		_bird.depth       += _bird.distance;
 		_bird.apply_distance();
-		_bird.wave_seed      = _seed;
-		_bird.wave_amplitude = _amp;
-		_bird.wave_freq      = _freq;
-		_bird.breathe_seed   = _breathe_seed;
-		_bird.flight_speed   = _speed * random_range(0.98, 1.02);
-		_bird.can_dive       = (_count == 1); // only loners hunt
-
-		// Formation offsets; leader is in front (leftmost). The y offset
-		// goes into form_dy so the formation can breathe in Step.
-		var _dx, _dy;
-		switch (_shape) {
-			case "v": // two diagonal lines trailing the leader
-				var _slot = (i + 1) div 2;
-				var _side = (i mod 2 == 0) ? 1 : -1;
-				_dx = i * _gap_x;
-				_dy = _side * _slot * _gap_y;
-				break;
-			case "line": // single diagonal skein
-				_dx = i * _gap_x * 0.9;
-				_dy = _line_side * i * _gap_y * 0.7;
-				break;
-			default: // loose cluster
-				_dx = i * _gap_x * 0.5 + random_range(-20, 20);
-				_dy = random_range(-2.5 * _gap_y, 2.5 * _gap_y);
-				break;
+		_bird.flight_speed = _brain.flight_speed * random_range(0.98, 1.02);
+		_bird.flock_id     = _brain;
+		_bird.slot_index   = i;
+		// ~1 in 5 birds is a straggler: follows the flock, but loosely
+		if (irandom(4) == 0) {
+			_bird.cohesion    = 0.45;
+			_bird.wander_amp *= 1.6;
 		}
-		_bird.form_dy = _dy + random_range(-6, 6);
-		_bird.x = room_width + _bird.sprite_width / 2 + _dx + random_range(-8, 8);
-		_bird.y = _base_y + _bird.form_dy;
+
+		var _slot = _brain.slot_pos(i);
+		_bird.x = _slot[0] + random_range(-8, 8);
+		_bird.y = _slot[1] + random_range(-6, 6);
+		array_push(_brain.members, _bird);
 	}
 }
 
@@ -248,6 +281,19 @@ function spawn_explosion(_x, _y) {
 	effect_create_above(ef_explosion, _x, _y, 1, c_dkgray);
 	part_type_color1(global.ExplosionParticle, $676bae); // darker color: $223364
 	part_particles_create(global.part_system, _x, _y, global.ExplosionParticle, 10);
+
+	// Background birds scatter from nearby blasts. The fright spreads
+	// outward as a ripple: birds further from the blast flinch later.
+	// Explosions happen in the gameplay plane, so birds in far parallax
+	// bands don't react at all and mid-band birds only to close blasts.
+	with (obj_bird) {
+		var _d = point_distance(x, y, _x, _y);
+		if (distance < 2 && _d < 380 / distance && startle_delay <= 0) {
+			threat_x = _x;
+			threat_y = _y;
+			startle_delay = max(1, floor(_d / 12));
+		}
+	}
 }
 
 function spawn_explosion_red(_x, _y) {

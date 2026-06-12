@@ -14,7 +14,7 @@ global.start_from_level = 0;
 global.start_from_boss = false;
 global.env_speed = 2.5;
 dbg_overlay = false;
-debug_slider_dragging = -1;
+debug_slider_dragging = undefined;
 global.tree_spawn_mult  = 2;
 global.rock_spawn_mult  = 0.5;
 global.plant_spawn_mult = 10;
@@ -22,6 +22,13 @@ global.plane_speed_mult = 1;
 global.tank_speed_mult  = 1;
 global.plane_bob_mult   = 1.5;
 global.plane_bob_arc    = 67;   // steps per noise feature (~1.1s at 60fps)
+// Bird tuning (debug overlay "BIRDS" group; most disable the behavior at 0)
+global.bird_rate_mult     = 1;  // flock spawn frequency
+global.bird_wave_mult     = 1;  // arc/wave amplitude
+global.bird_flap_mult     = 1;  // wing animation pace
+global.bird_panic_mult    = 1;  // panic flee speed (0 = ignore threats)
+global.bird_resp_mult     = 1;  // steering responsiveness
+global.bird_decision_mult = 1;  // flock decision frequency (0 = static)
 
 music_on = true;
 help = 0;
