@@ -12,7 +12,7 @@ function difficulty_multiplier() {
 	if (global.level_done) {
 		return 0;
 	}
-	var difficulty_multipliers = [0.3, 0.4, 0.5, 0.6, 0.7];
+	var difficulty_multipliers = [0.2, 0.35, 0.5, 0.65, 0.8];
 	return difficulty_multipliers[global.difficulty_level];
 }
 
