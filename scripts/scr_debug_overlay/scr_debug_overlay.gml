@@ -44,12 +44,13 @@ function dbg_slider_groups() {
 			{ label: "Bob Arc Len", max: 300, get: function() { return global.plane_bob_arc;  }, set: function(_v) { global.plane_bob_arc  = _v; } },
 		] },
 		{ title: "BIRDS", sliders: [
-			{ label: "Flock Rate",  max: 3, get: function() { return global.bird_rate_mult;     }, set: function(_v) { global.bird_rate_mult     = _v; } },
+			{ label: "Flock Rate",  max: 10, get: function() { return global.bird_rate_mult;     }, set: function(_v) { global.bird_rate_mult     = _v; } },
 			{ label: "Wave Amp",    max: 3, get: function() { return global.bird_wave_mult;     }, set: function(_v) { global.bird_wave_mult     = _v; } },
 			{ label: "Flap Pace",   max: 3, get: function() { return global.bird_flap_mult;     }, set: function(_v) { global.bird_flap_mult     = _v; } },
 			{ label: "Panic",       max: 3, get: function() { return global.bird_panic_mult;    }, set: function(_v) { global.bird_panic_mult    = _v; } },
 			{ label: "Steer Resp",  max: 3, get: function() { return global.bird_resp_mult;     }, set: function(_v) { global.bird_resp_mult     = _v; } },
 			{ label: "Decisions",   max: 5, get: function() { return global.bird_decision_mult; }, set: function(_v) { global.bird_decision_mult = _v; } },
+			{ label: "Flock Size",  max: 5, get: function() { return global.bird_size_mult;     }, set: function(_v) { global.bird_size_mult     = _v; } },
 		] },
 	];
 }

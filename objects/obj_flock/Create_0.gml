@@ -23,8 +23,10 @@ gap_y = 11;
 // Cluster formations get stable per-slot offsets, re-rolled on each morph
 cluster_off = [];
 roll_cluster = function() {
+	// 80 slots so the "Flock Size" debug slider (up to 5x -> 75 birds)
+	// always finds an offset
 	cluster_off = [];
-	for (var i = 0; i < 16; i++) {
+	for (var i = 0; i < 80; i++) {
 		array_push(cluster_off, [
 			i * gap_x * 0.5 + random_range(-20, 20),
 			random_range(-2.5 * gap_y, 2.5 * gap_y)

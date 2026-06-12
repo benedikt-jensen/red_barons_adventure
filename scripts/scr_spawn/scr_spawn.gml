@@ -191,7 +191,7 @@ function spawn_bird_flock() {
 	// drifting across the sky in the far background.
 	if (irandom(5) == 0) {
 		var _kdist  = random_range(1.8, 3);
-		var _kcount = irandom_range(4, 12);
+		var _kcount = irandom_range(4, max(4, round(12 * global.bird_size_mult)));
 		var _kx     = room_width + 120;
 		var _ky     = random_range(room_height * 0.12, room_height * 0.4);
 		var _kseed  = random(256);
@@ -223,7 +223,9 @@ function spawn_bird_flock() {
 	else if (_roll < 0.42) _count = 2;
 	else if (_roll < 0.72) _count = irandom_range(3, 5);
 	else if (_roll < 0.92) _count = irandom_range(6, 9);
-	else                   _count = irandom_range(10, 15);
+	else                   _count = irandom_range(10, max(10, round(15 * global.bird_size_mult)));
+	// ^ the "Flock Size" debug slider only raises the top end: big flocks
+	//   can grow up to 5x (75 birds), small groups stay small
 
 	// A lone hunter flies its own noise path (and may dive)
 	if (_count == 1) {
