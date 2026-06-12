@@ -7,20 +7,25 @@ if(hp <= 0)
 	instance_destroy();
 }
 
-x += - object_speed * global.plane_speed_mult;
+var _vx = object_speed * global.plane_speed_mult;
+x += -_vx;
 
 // Perlin-noise bobbing: apply the noise *delta* so the drift stacks on top
-// of whatever y the plane spawned at.
-bob_timer += 1;
-var _bob = perlin_noise(bob_timer * bob_frequency, bob_seed) * bob_amplitude;
-var _dy = _bob - bob_prev;
-bob_prev = _bob;
+// of whatever y the plane spawned at. Strength is scaled live by the
+// "Plane Bob" debug slider; "Bob Arc Len" sets how many steps one noise
+// feature spans (longer = wider, lazier arcs). Advancing the phase
+// incrementally keeps live slider changes smooth.
+bob_t += 1 / max(global.plane_bob_arc, 1);
+var _noise = perlin_noise(bob_t, bob_seed);
+var _dy = (_noise - bob_prev) * bob_amplitude * global.plane_bob_mult;
+bob_prev = _noise;
 y += _dy;
 
-// Tilt into the vertical motion like the player does (eased, capped at
-// +/-10 degrees). Sign is flipped vs the player because enemy sprites face
-// left: descending = nose down = counterclockwise = positive image_angle.
-var _tilt_target = clamp(_dy * 10, -10, 10);
+// Point the nose along the actual flight path: the tilt is the angle of
+// the velocity vector, so it scales naturally with bob strength and arc
+// length and can never pin against an artificial min/max. The -180 offset
+// is because enemy sprites face left.
+var _tilt_target = angle_difference(point_direction(0, 0, -_vx, _dy), 180);
 if (tilt_angle < _tilt_target) tilt_angle = min(tilt_angle + 2, _tilt_target);
 if (tilt_angle > _tilt_target) tilt_angle = max(tilt_angle - 2, _tilt_target);
 image_angle = tilt_angle;

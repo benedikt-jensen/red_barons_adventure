@@ -33,6 +33,8 @@ function dbg_slider_defs() {
 		{ label: "Tank Spawn",  max: 10, get: function() { return global.tank_spawn_mult;  }, set: function(_v) { global.tank_spawn_mult  = _v; } },
 		{ label: "Spawn Ramp",  max: global.enemy_spawn_ramp_max,
 			get: function() { return global.enemy_spawn_ramp; }, set: function(_v) { global.enemy_spawn_ramp = _v; } },
+		{ label: "Plane Bob",   max: 10, get: function() { return global.plane_bob_mult;  }, set: function(_v) { global.plane_bob_mult  = _v; } },
+		{ label: "Bob Arc Len", max: 300, get: function() { return global.plane_bob_arc; }, set: function(_v) { global.plane_bob_arc   = _v; } },
 	];
 }
 
@@ -50,6 +52,12 @@ function dbg_wave_button_data() {
 	];
 }
 
+function dbg_wave_header_y(_py1) {
+	// The "Spawn Wave" header sits just below the last slider row, so the
+	// section moves down automatically when sliders are added.
+	return _py1 + 52 + array_length(dbg_slider_defs()) * 35;
+}
+
 function dbg_wave_button_rect(_index, _px1, _py1) {
 	// 2-column grid below the "Spawn Wave" header. fnt_debug glyphs are
 	// 16x32, so buttons must fit a 9-char label (144px) plus padding.
@@ -57,6 +65,6 @@ function dbg_wave_button_rect(_index, _px1, _py1) {
 	var _col = _index mod 2;
 	var _row = _index div 2;
 	var _x1 = _px1 + 6 + _col * (_w + _gap);
-	var _y1 = _py1 + 404 + _row * (_h + _gap);
+	var _y1 = dbg_wave_header_y(_py1) + 37 + _row * (_h + _gap);
 	return [_x1, _y1, _x1 + _w, _y1 + _h];
 }

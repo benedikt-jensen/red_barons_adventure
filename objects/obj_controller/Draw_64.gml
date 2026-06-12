@@ -99,7 +99,7 @@ if dbg_overlay {
 	draw_set_color(c_white);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);
-	draw_text(_panel.x1 + 6, _panel.y1 + 367, "Spawn Wave");
+	draw_text(_panel.x1 + 6, dbg_wave_header_y(_panel.y1), "Spawn Wave");
 
 	for (var i = 0; i < array_length(_wave_buttons); i++) {
 		var _rect = dbg_wave_button_rect(i, _panel.x1, _panel.y1);

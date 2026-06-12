@@ -20,6 +20,8 @@ global.rock_spawn_mult  = 0.5;
 global.plant_spawn_mult = 10;
 global.plane_speed_mult = 1;
 global.tank_speed_mult  = 1;
+global.plane_bob_mult   = 1.5;
+global.plane_bob_arc    = 67;   // steps per noise feature (~1.1s at 60fps)
 
 music_on = true;
 help = 0;
