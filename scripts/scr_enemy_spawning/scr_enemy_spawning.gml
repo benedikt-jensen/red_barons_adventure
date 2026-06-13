@@ -48,6 +48,13 @@ function spawn_enemies() {
 function spawn_planes() {
 	if (random(100) < global.plane_spawn_mult * global.enemy_spawn_ramp / 100) {
 		switch (room) {
+			case room_sunset:
+				if (!boss_spawned) {
+					spawn_on_right_limit_y(obj_enemy, 0, global.y_limit);
+				} else {
+					spawn_on_right_limit_y(obj_enemy, 0, global.y_limit - 250);
+				}
+				break;
 			case room_grasslands:
 				if (boss_spawned) {
 					spawn_on_right_limit_y(obj_enemy, 0, global.y_limit - 200);
@@ -55,6 +62,7 @@ function spawn_planes() {
 					spawn_on_right_limit_y(obj_enemy, 0, global.y_limit - 100);
 				}
 				break;
+			case room_mountains:
 			default:
 				spawn_on_right_limit_y(obj_enemy, 0, global.y_limit);
 				break;
@@ -66,13 +74,8 @@ function spawn_tanks() {
 	switch (room) {
 		case room_grasslands:
 			if (!boss_spawned) {
-				if (global.tank_spawn_cooldown <= 0) {
-					if (random(100) < global.tank_spawn_mult * global.enemy_spawn_ramp / 100) {
-						global.tank_spawn_cooldown = global.tank_spawn_cooldown_duration;
-						spawn_vehicle(obj_enemy_tank, 1.5, 1.5);
-					}
-				} else {
-					global.tank_spawn_cooldown -= 1;
+				if (random(100) < global.tank_spawn_mult * global.enemy_spawn_ramp / 100) {
+					spawn_vehicle(obj_enemy_tank, 1.5, 1.5);
 				}
 			}
 			break;

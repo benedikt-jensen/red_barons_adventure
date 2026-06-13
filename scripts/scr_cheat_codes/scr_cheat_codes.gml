@@ -92,6 +92,7 @@ function update_cheats() {
 	if cheat_is_active("spawnboss") {
 		global.cheat_codes[? "spawnboss"] = false;
 		global.spawn_boss = true;
+		global.level_progress = global.level_progress_max;
 	}
 	
 	// charge fire bullets
