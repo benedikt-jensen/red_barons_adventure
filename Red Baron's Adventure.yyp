@@ -142,6 +142,7 @@
     {"id":{"name":"create_instance_layer","path":"scripts/create_instance_layer/create_instance_layer.yy",},},
     {"id":{"name":"create_textevent","path":"scripts/create_textevent/create_textevent.yy",},},
     {"id":{"name":"reset_dialogue_defaults","path":"scripts/reset_dialogue_defaults/reset_dialogue_defaults.yy",},},
+    {"id":{"name":"scr_camera_shake","path":"scripts/scr_camera_shake/scr_camera_shake.yy",},},
     {"id":{"name":"scr_cheat_codes","path":"scripts/scr_cheat_codes/scr_cheat_codes.yy",},},
     {"id":{"name":"scr_controls","path":"scripts/scr_controls/scr_controls.yy",},},
     {"id":{"name":"scr_debug_overlay","path":"scripts/scr_debug_overlay/scr_debug_overlay.yy",},},

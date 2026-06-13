@@ -2,9 +2,15 @@ function damage_player(_amount, _cooldown) {
 	with (obj_red_baron) {
 		if damage_cooldown > 0 { return; }
 		damage_cooldown = _cooldown;
+		var _hit = _amount * difficulty_multiplier(); // hit force, before armour
 		with(obj_controller) {
-			hp += -_amount * difficulty_multiplier() / other.armour;
+			hp += -_hit / other.armour;
 		}
+		// Shake reflects the hit's force (not the armour-reduced HP loss), so it
+		// still jolts under the invincible (high-armour) cheat. Trauma adds
+		// linearly so several small hits and one big hit of the same total force
+		// shake identically (the running total is clamped to 1 in add_trauma).
+		camera_shake(_hit / 30);
 	}
 }
 

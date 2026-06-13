@@ -38,6 +38,18 @@ game_over = 0;
 hp = 100;
 in_game = 0;
 
+// SCREEN SHAKE (see scr_camera_shake). The frame is composited into the
+// application surface; the Post-Draw event blits it back with this offset.
+global.shake_intensity = 10; // debug-overlay master scale on all shake
+trauma       = 0;     // current shake energy, 0..1
+trauma_decay = 1.6;   // trauma lost per second
+max_offset   = 18;    // peak positional shake in pixels
+max_angle    = 1.2;   // peak rotational shake in degrees
+shake_x      = 0;
+shake_y      = 0;
+shake_angle  = 0;
+application_surface_draw_enable(false); // we draw it ourselves (with the shake)
+
 // Create Sunset Filter Surface
 filter_surface = surface_create(room_width, room_height);
 

@@ -50,6 +50,9 @@ function dbg_slider_groups() {
 			{ label: "Plane Bob",   max: 10,  get: function() { return global.plane_bob_mult; }, set: function(_v) { global.plane_bob_mult = _v; } },
 			{ label: "Bob Arc Len", max: 300, get: function() { return global.plane_bob_arc;  }, set: function(_v) { global.plane_bob_arc  = _v; } },
 		] },
+		{ title: "CAMERA", sliders: [
+			{ label: "Shake Scale", max: 30, get: function() { return global.shake_intensity; }, set: function(_v) { global.shake_intensity = _v; } },
+		] },
 		{ title: "POWERUPS", sliders: dbg_powerup_sliders() },
 		{ title: "BIRDS", sliders: [
 			{ label: "Flock Rate",  max: 10, get: function() { return global.bird_rate_mult;     }, set: function(_v) { global.bird_rate_mult     = _v; } },
