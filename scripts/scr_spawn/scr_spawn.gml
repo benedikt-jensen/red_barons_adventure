@@ -227,34 +227,6 @@ function spawn_bird_flock() {
 	// one distance band, air current (wave_seed) and base speed, so the
 	// whole flock undulates along the same path; per-bird flutter, flap
 	// phase and slight speed differences keep it organic.
-	// Rare: a "kettle" - birds soaring in circles on a thermal, slowly
-	// drifting across the sky in the far background.
-	if (irandom(5) == 0) {
-		var _kdist  = random_range(1.8, 3);
-		var _kcount = irandom_range(4, max(4, round(12 * global.bird_size_mult)));
-		var _kx     = room_width + 120;
-		var _ky     = random_range(room_height * 0.12, room_height * 0.4);
-		var _kseed  = random(256);
-		var _kspeed = random_range(0.9, 1.4);
-		for (var i = 0; i < _kcount; i++) {
-			var _kb = instance_create_layer(0, 0, "Instances", obj_bird);
-			_kb.depth      -= _kb.distance;
-			_kb.distance    = _kdist * random_range(0.97, 1.03);
-			_kb.depth      += _kb.distance;
-			_kb.apply_distance();
-			_kb.mode        = "kettle";
-			_kb.wave_seed   = _kseed;
-			_kb.center_x    = _kx + random_range(-25, 25);
-			_kb.center_y    = _ky + random_range(-20, 20);
-			_kb.orbit_r     = random_range(55, 85) / _kb.distance;
-			_kb.orbit_phase = random(360);
-			_kb.orbit_speed = _kspeed * random_range(0.95, 1.05);
-			_kb.x           = _kb.center_x + lengthdir_x(_kb.orbit_r, _kb.orbit_phase);
-			_kb.y           = _kb.center_y;
-		}
-		return;
-	}
-
 	// Weighted size variety: loners and pairs are common, mid-size groups
 	// the norm, big skeins rare.
 	var _roll = random(1);

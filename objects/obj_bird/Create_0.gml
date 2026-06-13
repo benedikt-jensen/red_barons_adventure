@@ -25,7 +25,7 @@ image_speed = flap_pace;
 
 // Loner path: shared arc (wave_*) + tiny personal flutter (jitter_*),
 // sampled by world x. Flock birds only use jitter_* (their arc comes from
-// the brain), kettle birds orbit a thermal instead.
+// the brain).
 wave_seed      = random(256);
 wave_amplitude = random_range(20, 45);
 wave_freq      = 1 / random_range(500, 900); // world px per noise feature
@@ -46,18 +46,7 @@ slot_index = 0;
 wander_amp = random_range(8, 18);
 cohesion   = 1;
 
-// mode "path": fly left (loner path or flock slot-steering).
-// mode "kettle": soar in circles around a drifting thermal column.
-mode        = "path";
-orbit_phase = 0;
-orbit_r     = 30;
-orbit_speed = 1.2;
-center_x    = 0;
-center_y    = 0;
-drift_speed = 2.5;
-flap_burst  = 0;
-
-// Path-mode states: cruise | dive | skim | panic | recover
+// States: cruise | dive | skim | panic | recover
 state       = "cruise";
 can_dive    = false; // enabled for loners by the spawner
 dive_vy     = 0;
@@ -74,12 +63,6 @@ threat_y      = 0;
 
 startle = function(_sx, _sy) {
 	if (state == "dive" || state == "skim" || state == "panic") return;
-	if (mode == "kettle") {
-		// Scatter: abandon the thermal and flee as a normal path bird
-		mode = "path";
-		base_y = y;
-		image_xscale = abs(image_xscale);
-	}
 	state = "panic";
 	panic_timer = irandom_range(50, 90);
 	panic_total = panic_timer;
