@@ -1,6 +1,7 @@
 global.music_volume = 1;
 global.sfx_volume = 1;
 global.master_volume = 1;
+global.soft_maneuvering = true; // analog stick/joystick allow small (slow) movement; off = full speed only
 
 enum BGMusicDefaultGain {
 	Fliegermarsch,

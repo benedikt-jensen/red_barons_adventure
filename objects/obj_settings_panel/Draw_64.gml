@@ -62,6 +62,23 @@ for (var i = 0; i < 3; i++) {
     draw_text(track_x + track_w + 16, ty, string(round(val * 100)) + "%");
 }
 
+// Soft Maneuvering toggle
+draw_set_halign(fa_left);
+draw_set_color(col_label);
+draw_text(lbl_x, toggle_cy, "Soft Maneuvering");
+
+draw_set_color(col_track);
+draw_rectangle(toggle_cx - toggle_hs, toggle_cy - toggle_hs, toggle_cx + toggle_hs, toggle_cy + toggle_hs, false);
+draw_set_color(col_border);
+draw_rectangle(toggle_cx - toggle_hs, toggle_cy - toggle_hs, toggle_cx + toggle_hs, toggle_cy + toggle_hs, true);
+if (global.soft_maneuvering) {
+    draw_set_color(col_fill);
+    draw_rectangle(toggle_cx - toggle_hs + 5, toggle_cy - toggle_hs + 5, toggle_cx + toggle_hs - 5, toggle_cy + toggle_hs - 5, false);
+}
+
+draw_set_color(col_pct);
+draw_text(toggle_cx + toggle_hs + 16, toggle_cy, global.soft_maneuvering ? "ON" : "OFF");
+
 // Close button
 var close_hover = abs(mx - close_cx) < close_hw && abs(my - close_cy) < close_hh;
 draw_set_color(close_hover ? make_color_rgb(160, 60, 40) : make_color_rgb(110, 35, 25));

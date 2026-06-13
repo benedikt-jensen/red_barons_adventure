@@ -19,6 +19,10 @@ if pressed {
             dragging = i;
         }
     }
+
+    if abs(mx - toggle_cx) <= toggle_hs && abs(my - toggle_cy) <= toggle_hs {
+        global.soft_maneuvering = !global.soft_maneuvering;
+    }
 }
 
 if dragging >= 0 {

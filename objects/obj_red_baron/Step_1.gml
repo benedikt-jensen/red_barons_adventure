@@ -35,9 +35,32 @@ if (!global.UsingTouchScreen) {
 		y_movement /= sqrt(2);
 	}
 
+	// Gamepad stick / D-pad takes over when deflected (mirrors the joystick).
+	var _pad = active_gamepad();
+	if (_pad >= 0) {
+		var _mv = gamepad_move_vector(_pad);
+		if (_mv.x != 0 || _mv.y != 0) {
+			x_movement = _mv.x;
+			y_movement = _mv.y;
+		}
+	}
+
 } else {
 	x_movement = obj_joystick.joy_x / obj_joystick.radius;
 	y_movement = obj_joystick.joy_y / obj_joystick.radius;
+}
+
+// Gamepad action buttons (shoot / missile / bomb / laser / light).
+handle_gamepad_actions();
+
+// "Soft Maneuvering" off: snap analog input to full speed in its direction, so
+// small stick/joystick deflections fly at full speed (keyboard is already 0/1).
+if (!global.soft_maneuvering) {
+	var _m = point_distance(0, 0, x_movement, y_movement);
+	if (_m > 0) {
+		x_movement /= _m;
+		y_movement /= _m;
+	}
 }
 
 x_movement *= red_baron_speed;
