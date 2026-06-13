@@ -74,8 +74,13 @@ function spawn_tanks() {
 	switch (room) {
 		case room_grasslands:
 			if (!boss_spawned) {
-				if (random(100) < global.tank_spawn_mult * global.enemy_spawn_ramp / 100) {
-					spawn_vehicle(obj_enemy_tank, 1.5, 1.5);
+				if (global.tank_spawn_cooldown <= 0) {
+					if (random(100) < global.tank_spawn_mult * global.enemy_spawn_ramp / 100) {
+						spawn_vehicle(obj_enemy_tank, 1.5, 1.5);
+						global.tank_spawn_cooldown = global.tank_spawn_cooldown_duration
+					}
+				} else {
+					global.tank_spawn_cooldown -= 1;
 				}
 			}
 			break;
