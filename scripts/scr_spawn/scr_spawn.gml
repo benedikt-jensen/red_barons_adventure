@@ -6,47 +6,87 @@ function instance_create_depth_with_fixture(_parent_id, _x, _y, _depth, _obj_ind
 	return _o;
 }
 
-// --- Powerup drops --------------------------------------------------------
+function powerup_types() {
+	// Registry of droppable powerups. Add an entry here and it shows up in
+	// the weighted roll and the debug overlay automatically.
+	return [
+		{ key: "bombs",     label: "Bombs",     obj: obj_bombs_powerup },
+		{ key: "fire",      label: "Fire Blts", obj: obj_fire_bullets_powerup },
+		{ key: "first_aid", label: "First Aid", obj: obj_first_aid },
+		{ key: "laser",     label: "Laser",     obj: obj_laser_powerup },
+		{ key: "missiles",  label: "Missiles",  obj: obj_missile_powerup },
+	];
+}
 
-function spawn_powerup_drop(_x, _y, _chance_per_kill, _pool) {
-	// Drop chance grows with every kill since the last drop and resets when
-	// one spawns. Returns true if a powerup dropped.
-	if (random_range(0, 1) >= _chance_per_kill * (global.destroyed_airplanes - global.prev_powerup_at)) {
-		return false;
+function powerup_effective_weight(_key) {
+	var _w = global.powerup_weights[$ _key];
+	// A wounded player finds first aid three times as often. The pick is
+	// normalized by the total weight, so this shifts the shares without
+	// changing the overall drop rate.
+	if (_key == "first_aid" && instance_exists(obj_controller) && obj_controller.hp < 50) {
+		_w *= 3;
 	}
+	return _w;
+}
+
+function powerup_pick_weighted(_exclude = []) {
+	// Weighted random choice; returns the object index, or undefined when
+	// every eligible weight is 0.
+	var _types = powerup_types();
+	var _total = 0;
+	for (var i = 0; i < array_length(_types); i++) {
+		if (array_contains(_exclude, _types[i].key)) continue;
+		_total += powerup_effective_weight(_types[i].key);
+	}
+	if (_total <= 0) return undefined;
+
+	var _roll = random(_total);
+	for (var i = 0; i < array_length(_types); i++) {
+		if (array_contains(_exclude, _types[i].key)) continue;
+		_roll -= powerup_effective_weight(_types[i].key);
+		if (_roll < 0) return _types[i].obj;
+	}
+	return _types[array_length(_types) - 1].obj; // float-rounding fallback
+}
+
+function powerup_drop_chance(_start_chance, _kills_since) {
+	// Quadratic ease-in pity ramp:
+	//   chance(n) = start + (1 - start) * (n/N)^2
+	// Starts at the start chance, climbs slowly at first and ever quicker,
+	// and reaches exactly 1 when the dry streak hits N = powerup_max_wait.
+	var _t = clamp(_kills_since / max(global.powerup_max_wait, 1), 0, 1);
+	return clamp(_start_chance + (1 - _start_chance) * _t * _t, 0, 1);
+}
+
+function powerup_effective_chance() {
+	// What spawn_powerup_drop's _chance would be for the next regular kill
+	// (shown read-only in the debug overlay).
+	var _no_powerups_since = global.destroyed_airplanes - global.prev_powerup_at;
+	return powerup_drop_chance(global.powerup_start_chance, _no_powerups_since + 1);
+}
+
+function spawn_powerup_drop(_x, _y, _rate_scale, _exclude = []) {
+	// Saturating ramp (see powerup_drop_chance); resets on a drop.
+	// _rate_scale discounts rarer sources (bosses/vehicles).
+	// Returns true if one dropped.
+	var _no_powerups_since = global.destroyed_airplanes - global.prev_powerup_at;
+	var _chance = powerup_drop_chance(global.powerup_start_chance * _rate_scale, _no_powerups_since);
+	if (random_range(0, 1) >= _chance) return false;
+
+	var _obj = powerup_pick_weighted(_exclude);
+	if (_obj == undefined) return false;
 	global.prev_powerup_at = global.destroyed_airplanes;
-	spawn_random_powerup(_x, _y, _pool);
+	instance_create_layer(_x, _y, "Instances", _obj);
 	return true;
 }
 
 function spawn_powerup_maybe(_x, _y) {
-	// Standard drop table for regular enemies.
-	var _dropped = spawn_powerup_drop(_x, _y, 0.01, [
-		obj_bombs_powerup,
-		obj_fire_bullets_powerup,
-		obj_first_aid,
-		obj_laser_powerup,
-		obj_missile_powerup
-	]);
+	// Standard drop roll for regular enemies.
+	var _dropped = spawn_powerup_drop(_x, _y, 1);
 	// During the grasslands boss fight, keep the player stocked with bombs.
 	if (!_dropped && irandom(10)==0 && room==room_grasslands && obj_controller.boss_spawned) {
 		instance_create_layer(_x, _y, "Instances", obj_bombs_powerup);
 	}
-}
-
-function spawn_powerup_maybe_rare(_x, _y) {
-	// Reduced-chance drop table used by bosses and ground vehicles.
-	spawn_powerup_drop(_x, _y, 0.005, [
-		obj_missile_powerup,
-		obj_fire_bullets_powerup,
-		obj_laser_powerup,
-		obj_first_aid
-	]);
-}
-
-function spawn_random_powerup(_x, _y, _possible_powerups) {
-	var _i = irandom(array_length(_possible_powerups) - 1);
-	instance_create_layer(_x, _y, "Instances", _possible_powerups[_i]);
 }
 
 // --- Environment lanes ----------------------------------------------------

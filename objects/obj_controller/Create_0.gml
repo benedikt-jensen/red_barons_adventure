@@ -30,6 +30,7 @@ global.bird_panic_mult    = 1;  // panic flee speed (0 = ignore threats)
 global.bird_resp_mult     = 1;  // steering responsiveness
 global.bird_decision_mult = 1;  // flock decision frequency (0 = static)
 global.bird_size_mult     = 2;  // flock size multiplier (up to 5x)
+global.dbg_ignore_ramp_points = false; // bypass enemy_spawn_ramp_points curve
 
 music_on = true;
 help = 0;

@@ -81,7 +81,14 @@ if dbg_overlay {
                     dbg_group_toggle(_row.title);
                     break;
                 }
-            } else if (_mx >= _panel.slider_x1 && _mx <= _panel.slider_x2 && abs(_my - _ry) < 12) {
+            } else if (_row.def[$ "checkbox"] == true) {
+                if (_mx >= _panel.x1 && _mx <= _panel.x2 && abs(_my - _ry) < 12) {
+                    _row.def.set(!_row.def.get());
+                    break;
+                }
+            } else if (_row.def[$ "readonly"] != true
+            && (_row.def[$ "disabled"] == undefined || !_row.def.disabled())
+            && _mx >= _panel.slider_x1 && _mx <= _panel.slider_x2 && abs(_my - _ry) < 12) {
                 debug_slider_dragging = _row.def;
                 break;
             }
@@ -89,8 +96,12 @@ if dbg_overlay {
     }
     if mouse_check_button_released(mb_left) debug_slider_dragging = undefined;
     if debug_slider_dragging != undefined {
-        var _t = clamp((_mx - _panel.slider_x1) / (_panel.slider_x2 - _panel.slider_x1), 0, 1);
-        debug_slider_dragging.set(_t * debug_slider_dragging.max);
+        if (debug_slider_dragging[$ "disabled"] != undefined && debug_slider_dragging.disabled()) {
+            debug_slider_dragging = undefined; // slider got disabled mid-drag
+        } else {
+            var _t = clamp((_mx - _panel.slider_x1) / (_panel.slider_x2 - _panel.slider_x1), 0, 1);
+            debug_slider_dragging.set(_t * debug_slider_dragging.max);
+        }
     }
 
     if mouse_check_button_pressed(mb_left) {

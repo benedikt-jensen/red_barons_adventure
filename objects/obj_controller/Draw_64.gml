@@ -23,6 +23,18 @@ if (in_game == 1)
 		var _bar_y1 = display_get_gui_height() - _bar_h - 15;
 		var _progress = clamp(global.level_progress / global.level_progress_max, 0, 1);
 		draw_progress_bar(_bar_x1, _bar_y1, _bar_x1 + _bar_w, _bar_y1 + _bar_h, _progress);
+
+		// Mark the spawn-ramp curve points (see enemy_spawn_ramp_points)
+		// with a vertical line each
+		var _ramp_pts = global.enemy_spawn_ramp_points;
+		draw_set_color(c_gray);
+		for (var i = 0; i < array_length(_ramp_pts); i++) {
+			if (_ramp_pts[i][0] <= 0) continue; // skip the start-of-level point
+			if (_ramp_pts[i][0] >= 1) continue; // skip the end-of-level point
+			var _px = _bar_x1 + _ramp_pts[i][0] * _bar_w;
+			draw_line_width(_px, _bar_y1 + 3, _px, _bar_y1 + _bar_h - 3, 2);
+		}
+		draw_set_color(c_white);
 	}
 
 	if (global.show_destroyed_airplanes) {
@@ -90,6 +102,32 @@ if dbg_overlay {
 
 		var _slider = _row.def;
 		var _v  = _slider.get();
+
+		if (_slider[$ "checkbox"] == true) {
+			var _hover = (_mx >= _panel.x1 && _mx <= _panel.x2 && abs(_my - _y) < 12);
+			draw_set_color(_hover ? c_lime : c_white);
+			draw_set_halign(fa_left);
+			draw_text(_panel.x1 + 6, _y, _slider.label);
+			if (_v) {
+				draw_set_color(c_lime);
+				draw_rectangle(_panel.slider_x1 + 3, _y - 5, _panel.slider_x1 + 13, _y + 5, false);
+			}
+			draw_set_color(c_lime);
+			draw_rectangle(_panel.slider_x1, _y - 8, _panel.slider_x1 + 16, _y + 8, true);
+			continue;
+		}
+
+		var _disabled = (_slider[$ "disabled"] != undefined && _slider.disabled());
+		if (_slider[$ "readonly"] == true || _disabled) {
+			// Read-only / disabled row: dimmed label + live value, no track
+			draw_set_color(make_color_rgb(160, 160, 160));
+			draw_set_halign(fa_left);
+			draw_text(_panel.x1 + 6, _y, _slider.label);
+			draw_set_halign(fa_right);
+			draw_text(_panel.x2 - 6, _y, string_format(_v, 1, 2));
+			continue;
+		}
+
 		var _vx = _panel.slider_x1 + (_v / _slider.max) * (_panel.slider_x2 - _panel.slider_x1);
 
 		draw_set_color(c_white);

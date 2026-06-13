@@ -9,5 +9,3 @@ if (laser_sound) {
 	audio_stop_sound(laser_sound);
 }
 level_done();
-
-spawn_powerup_maybe_rare(x, y);

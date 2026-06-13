@@ -34,23 +34,52 @@ global.plant_spawn_mult = 15;
 global.plane_spawn_mult = 1;
 global.plane_speed_mult = 1.5;
 
-global.tank_spawn_mult  = 0.3;
+global.tank_spawn_mult  = 1;
+global.tank_spawn_cooldown_duration = 30;
+global.tank_spawn_cooldown = 0;
 global.tank_speed_mult  = 1;
 
-// Enemy spawn ramp - multiplies plane/tank spawn chances, rising from
-// _start to _max over the level (per-step rate), then holding at _max.
-// Resets to _start at the beginning of each level (see Other_4).
-global.enemy_spawn_ramp_start = 70;
-global.enemy_spawn_ramp_max   = 100;
-global.enemy_spawn_ramp       = global.enemy_spawn_ramp_start;
+// --- Powerup drops --------------------------------------------------------
+// Which powerup drops is a weighted roll over powerup_types(); the weights
+// and a master frequency multiplier are tunable live in the debug overlay
+// ("POWERUPS" group). A weight of 0 removes that type from the table.
+
+// Drop chance right after a drop ("Start Chance" debug slider) plus a
+// quadratic pity ramp: the chance accelerates with every dry kill and is
+// guaranteed (1.0) once the streak reaches powerup_max_wait kills
+// ("Max Wait" slider). See powerup_drop_chance().
+global.powerup_start_chance = 0.03;
+global.powerup_max_wait  = 30;
+global.powerup_weights = {
+	bombs:     1,
+	fire:      1,
+	first_aid: 1,
+	laser:     1,
+	missiles:  1,
+};
+
+// Enemy spawn ramp - multiplies plane/tank spawn chances. _points is an
+// optional piecewise-linear curve over level progress, e.g. a mid-level
+// lull: [[0, 40], [0.4, 100], [0.6, 30], [1, 120]]. When empty, the ramp
+// rises linearly from _start to _max over the level instead.
+global.enemy_spawn_ramp_start  = 70;
+global.enemy_spawn_ramp_max    = 100;
+global.enemy_spawn_ramp_points = [];
 
 if (room == room_sunset) {
-	global.plane_spawn_mult = 2.5;
+	global.enemy_spawn_ramp_points = [[0,15], [0.4,35], [0.7,60], [0.9,100], [1,5]];
+	global.plane_spawn_mult = 8;
 } else if (room == room_grasslands) {
+	global.powerup_start_chance = 0.06;
+	global.powerup_max_wait  = 60;
+	global.enemy_spawn_ramp_points = [[0,15], [0.45,50], [0.8,100], [1,25]];
+	global.plane_spawn_mult = 4;
 } else if (room == room_mountains) {
-	global.plane_spawn_mult = 3;
+	global.enemy_spawn_ramp_points = [[0,15], [0.4,35], [0.7,100], [1,15]];
+	global.plane_spawn_mult = 6;
 }
 
+global.enemy_spawn_ramp       = global.enemy_spawn_ramp_start;
 global.enemy_spawn_ramp_rate  = (global.enemy_spawn_ramp_max - global.enemy_spawn_ramp) / global.level_progress_max;
 
 // LEVEL CONFIG VARS end
