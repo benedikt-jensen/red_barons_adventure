@@ -93,6 +93,7 @@ ambiente_sounds = [];
 global.destroyed_airplanes = 0
 global.prev_powerup_at = 0
 global.level_done = false;
+global.input_shoot_laser = false;
 
 if (in_game) {
 	if (!instance_exists(obj_red_baron)) {

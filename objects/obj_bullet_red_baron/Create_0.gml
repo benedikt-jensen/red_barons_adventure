@@ -1,5 +1,8 @@
 /// @description Create
 
+// Muzzle flash where the shot leaves the guns
+emit_muzzle_flash(x, y);
+
 on_fire = false;
 damage = 33.4;
 

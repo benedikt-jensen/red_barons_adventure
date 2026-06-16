@@ -5,6 +5,9 @@ exec_scheduled_actions()
 camera_shake_step();
 if (keyboard_check_pressed(vk_f4)) camera_shake(0.8); // debug: preview the shake
 
+// Ambient motes (self-gated; off by default)
+spawn_ambient_motes();
+
 if (lightning_is_hitting) {
 	lightning_intensity = min(max(0,lightning_intensity+0.1),1);
 } else {

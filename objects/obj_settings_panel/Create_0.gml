@@ -3,7 +3,7 @@
 panel_x = 350;
 panel_y = 180;
 panel_w = 666;
-panel_h = 480;
+panel_h = 540;
 
 track_x = panel_x + 210;
 track_w = panel_w - 290;
@@ -13,8 +13,14 @@ thumb_r = 10;
 
 // "Soft Maneuvering" checkbox (below the volume sliders)
 toggle_cx = track_x + 14;
-toggle_cy = panel_y + 390;
+toggle_cy = panel_y + 385;
 toggle_hs = 14;
+
+// "Quality" cycling button (Low / Medium / High)
+quality_cy = panel_y + 440;
+quality_bx = track_x;
+quality_bw = 180;
+quality_bh = 30;
 
 close_cx = panel_x + panel_w * 0.5;
 close_cy = panel_y + panel_h - 45;

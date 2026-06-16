@@ -53,6 +53,10 @@ function dbg_slider_groups() {
 		{ title: "CAMERA", sliders: [
 			{ label: "Shake Scale", max: 30, get: function() { return global.shake_intensity; }, set: function(_v) { global.shake_intensity = _v; } },
 		] },
+		{ title: "FX", sliders: [
+			{ label: "Muzzle", checkbox: true, get: function() { return global.fx_muzzle; }, set: function(_v) { global.fx_muzzle = _v; } },
+			{ label: "Motes",  checkbox: true, get: function() { return global.fx_motes;  }, set: function(_v) { global.fx_motes  = _v; } },
+		] },
 		{ title: "POWERUPS", sliders: dbg_powerup_sliders() },
 		{ title: "BIRDS", sliders: [
 			{ label: "Flock Rate",  max: 10, get: function() { return global.bird_rate_mult;     }, set: function(_v) { global.bird_rate_mult     = _v; } },

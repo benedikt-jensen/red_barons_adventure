@@ -23,6 +23,11 @@ if pressed {
     if abs(mx - toggle_cx) <= toggle_hs && abs(my - toggle_cy) <= toggle_hs {
         global.soft_maneuvering = !global.soft_maneuvering;
     }
+
+    if mx >= quality_bx && mx <= quality_bx + quality_bw
+            && abs(my - quality_cy) <= quality_bh * 0.5 {
+        global.quality = (global.quality + 1) mod 3; // cycle Low -> Medium -> High
+    }
 }
 
 if dragging >= 0 {

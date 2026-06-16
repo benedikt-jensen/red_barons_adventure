@@ -17,12 +17,39 @@ function show_touch_controls() {
 		&& global.UsingTouchScreen;
 }
 
+// ----- Graphics quality (global.quality: 0 = low, 1 = medium, 2 = high) --------
+
+/// @desc Display name for the current quality setting.
+function quality_name() {
+	switch (global.quality) {
+		case 0:  return "LOW";
+		case 2:  return "HIGH";
+		default: return "MEDIUM";
+	}
+}
+
+/// @desc Multiplier on how many birds spawn (lower quality = fewer, for phones).
+function quality_bird_factor() {
+	switch (global.quality) {
+		case 0:  return 0.3;
+		case 2:  return 1.0;
+		default: return 0.6;
+	}
+}
+
 // ----- Gamepad (controller) support -------------------------------------------
 //
-// Mapping (Xbox layout): Left stick / D-pad = move, RT = shoot (hold),
-// B = launch missile, A = drop bomb, X = laser (hold), LB = toggle light,
+// Mapping (Xbox layout): Left stick / D-pad = move, A = shoot (hold),
+// X = launch missile, Y = toggle light, LT = drop bomb, RT = laser (hold),
 // A / Start = confirm in menus. Movement mirrors the virtual joystick: the
 // stick is analog, so a partial tilt flies slower.
+//
+// IMPORTANT: button actions use the *standard* SDL face-button positions
+// (gp_face1=A, gp_face2=B, gp_face3=X, gp_face4=Y). GameMaker only guarantees
+// these positions for pads it recognizes via its built-in SDL controller
+// database; an unrecognized pad falls back to raw button indices and the
+// physical buttons shift. If a pad maps wrong, it needs an SDL mapping entry
+// rather than hard-coded indices here.
 
 #macro GP_DEADZONE 0.12
 
@@ -65,12 +92,12 @@ function handle_gamepad_actions() {
 	var _pad = active_gamepad();
 	if (_pad < 0) return;
 
-	global.input_shoot = gamepad_button_check(_pad, gp_face3);                  // A (3)
-	if (gamepad_button_check_pressed(_pad, gp_face4))  global.input_launch_missile = true; // X (3)
-	if (gamepad_button_check_pressed(_pad, gp_shoulderlb))  global.input_drop_bomb       = true; // LT
-	if (gamepad_button_check_pressed(_pad, gp_shoulderrb))  global.input_shoot_laser     = true; // RT down
-	if (gamepad_button_check_released(_pad,gp_shoulderrb)) global.input_shoot_laser     = false; // RT up
-	if (gamepad_button_check_pressed(_pad, gp_face1)) {                          //  Y (1): light toggle
+	global.input_shoot = gamepad_button_check(_pad, gp_face1);                              // A: shoot (hold)
+	if (gamepad_button_check_pressed(_pad, gp_face3))  global.input_launch_missile = true;  // X: launch missile
+	if (gamepad_button_check_pressed(_pad, gp_shoulderlb))  global.input_drop_bomb   = true;  // LT: drop bomb
+	if (gamepad_button_check_pressed(_pad, gp_shoulderrb))  global.input_shoot_laser  = true;  // RT: laser down
+	if (gamepad_button_check_released(_pad, gp_shoulderrb)) global.input_shoot_laser  = false; // RT: laser up
+	if (gamepad_button_check_pressed(_pad, gp_face4)) {                                     // Y: light toggle
 		with (obj_red_baron) light_is_on = !light_is_on;
 	}
 }

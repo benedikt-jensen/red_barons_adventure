@@ -2,6 +2,7 @@ global.music_volume = 1;
 global.sfx_volume = 1;
 global.master_volume = 1;
 global.soft_maneuvering = true; // analog stick/joystick allow small (slow) movement; off = full speed only
+global.quality = 1; // graphics quality: 0 = low, 1 = medium, 2 = high (fewer birds on lower settings)
 
 enum BGMusicDefaultGain {
 	Fliegermarsch,

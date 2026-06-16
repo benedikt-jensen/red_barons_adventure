@@ -133,3 +133,31 @@ part_type_direction(global.FireParticle, 0, 359, 0, 0);
 part_type_alpha1(global.FireParticle, 0.5);
 part_type_blend(global.FireParticle, true);
 part_type_life(global.FireParticle, 10, 10);
+
+// ---- Visual FX particles (emitted via scr_visual_fx) ----
+
+// Muzzle flash: a tiny bright additive flare at the guns.
+global.MuzzleParticle = part_type_create();
+part_type_shape(global.MuzzleParticle, pt_shape_flare);
+part_type_size(global.MuzzleParticle, 0.5, 0.7, -0.08, 0);
+part_type_color2(global.MuzzleParticle, c_white, make_color_rgb(255, 180, 60));
+part_type_alpha2(global.MuzzleParticle, 1, 0);
+part_type_speed(global.MuzzleParticle, 0, 0.5, 0, 0);
+part_type_direction(global.MuzzleParticle, 0, 359, 0, 0);
+part_type_blend(global.MuzzleParticle, true);
+part_type_life(global.MuzzleParticle, 4, 7);
+
+// Ambient motes: sparse drifting dust/embers that twinkle in and out.
+global.MoteParticle = part_type_create();
+part_type_shape(global.MoteParticle, pt_shape_flare);
+part_type_size(global.MoteParticle, 0.04, 0.09, 0, 0);
+part_type_color1(global.MoteParticle, make_color_rgb(255, 250, 230));
+part_type_alpha3(global.MoteParticle, 0, 0.5, 0);
+part_type_speed(global.MoteParticle, 0.2, 0.6, 0, 0);
+part_type_direction(global.MoteParticle, 160, 200, 0, 0);
+part_type_blend(global.MoteParticle, true);
+part_type_life(global.MoteParticle, 120, 240);
+
+// Beauty-FX toggles (debug overlay "FX" group). Off by default.
+global.fx_muzzle = false;
+global.fx_motes  = false;

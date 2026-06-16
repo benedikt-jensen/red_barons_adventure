@@ -79,6 +79,23 @@ if (global.soft_maneuvering) {
 draw_set_color(col_pct);
 draw_text(toggle_cx + toggle_hs + 16, toggle_cy, global.soft_maneuvering ? "ON" : "OFF");
 
+// Quality cycling button (Low / Medium / High)
+draw_set_halign(fa_left);
+draw_set_color(col_label);
+draw_text(lbl_x, quality_cy, "Quality");
+
+var _q_hover = mx >= quality_bx && mx <= quality_bx + quality_bw
+        && abs(my - quality_cy) <= quality_bh * 0.5;
+draw_set_color(_q_hover ? make_color_rgb(95, 80, 55) : col_track);
+draw_rectangle(quality_bx, quality_cy - quality_bh * 0.5, quality_bx + quality_bw, quality_cy + quality_bh * 0.5, false);
+draw_set_color(col_border);
+draw_rectangle(quality_bx, quality_cy - quality_bh * 0.5, quality_bx + quality_bw, quality_cy + quality_bh * 0.5, true);
+
+draw_set_color(col_thumb);
+draw_set_halign(fa_center);
+draw_text(quality_bx + quality_bw * 0.5, quality_cy, "< " + quality_name() + " >");
+draw_set_halign(fa_left);
+
 // Close button
 var close_hover = abs(mx - close_cx) < close_hw && abs(my - close_cy) < close_hh;
 draw_set_color(close_hover ? make_color_rgb(160, 60, 40) : make_color_rgb(110, 35, 25));

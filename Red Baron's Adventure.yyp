@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"Red Baron's Adventure",
   "AudioGroups":[
-    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -162,6 +162,7 @@
     {"id":{"name":"scr_timed_actions","path":"scripts/scr_timed_actions/scr_timed_actions.yy",},},
     {"id":{"name":"scr_util","path":"scripts/scr_util/scr_util.yy",},},
     {"id":{"name":"scr_vectors","path":"scripts/scr_vectors/scr_vectors.yy",},},
+    {"id":{"name":"scr_visual_fx","path":"scripts/scr_visual_fx/scr_visual_fx.yy",},},
     {"id":{"name":"script_execute_alt","path":"scripts/script_execute_alt/script_execute_alt.yy",},},
     {"id":{"name":"src_damage","path":"scripts/src_damage/src_damage.yy",},},
     {"id":{"name":"src_draw_util","path":"scripts/src_draw_util/src_draw_util.yy",},},
