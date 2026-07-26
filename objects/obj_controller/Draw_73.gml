@@ -114,6 +114,9 @@ if (room == room_mountains) {
 if (room == room_sunset || room == room_mountains) {
 	if (!surface_exists(filter_surface)) {
 	    filter_surface = surface_create(room_width, room_height);
+	    surface_set_target(filter_surface);
+	    draw_clear_alpha(c_black, 0);
+	    surface_reset_target();
 	} else {
 		surface_set_target(filter_surface);
 		

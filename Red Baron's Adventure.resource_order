@@ -176,6 +176,7 @@
     {"name":"spr_bullet_sharp","order":9,"path":"sprites/spr_bullet_sharp/spr_bullet_sharp.yy",},
     {"name":"spr_bush","order":27,"path":"sprites/spr_bush/spr_bush.yy",},
     {"name":"spr_button_1","order":75,"path":"sprites/spr_button_1/spr_button_1.yy",},
+    {"name":"spr_button_circular","order":16,"path":"sprites/spr_button_circular/spr_button_circular.yy",},
     {"name":"spr_button","order":2,"path":"sprites/spr_button/spr_button.yy",},
     {"name":"spr_controls","order":62,"path":"sprites/spr_controls/spr_controls.yy",},
     {"name":"spr_debris","order":11,"path":"sprites/spr_debris/spr_debris.yy",},
@@ -254,6 +255,5 @@
     {"name":"spr_zeppelin_lanterns","order":8,"path":"sprites/spr_zeppelin_lanterns/spr_zeppelin_lanterns.yy",},
     {"name":"spr_zeppelin_propeller","order":6,"path":"sprites/spr_zeppelin_propeller/spr_zeppelin_propeller.yy",},
     {"name":"spr_zeppelin","order":1,"path":"sprites/spr_zeppelin/spr_zeppelin.yy",},
-    {"name":"Sprite83","order":16,"path":"sprites/Sprite83/Sprite83.yy",},
   ],
 }

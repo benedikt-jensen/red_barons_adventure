@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"Red Baron's Adventure",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -228,6 +228,7 @@
     {"id":{"name":"spr_bullet_sharp","path":"sprites/spr_bullet_sharp/spr_bullet_sharp.yy",},},
     {"id":{"name":"spr_bush","path":"sprites/spr_bush/spr_bush.yy",},},
     {"id":{"name":"spr_button_1","path":"sprites/spr_button_1/spr_button_1.yy",},},
+    {"id":{"name":"spr_button_circular","path":"sprites/spr_button_circular/spr_button_circular.yy",},},
     {"id":{"name":"spr_button","path":"sprites/spr_button/spr_button.yy",},},
     {"id":{"name":"spr_controls","path":"sprites/spr_controls/spr_controls.yy",},},
     {"id":{"name":"spr_debris","path":"sprites/spr_debris/spr_debris.yy",},},
@@ -309,7 +310,6 @@
     {"id":{"name":"spr_zeppelin_lanterns","path":"sprites/spr_zeppelin_lanterns/spr_zeppelin_lanterns.yy",},},
     {"id":{"name":"spr_zeppelin_propeller","path":"sprites/spr_zeppelin_propeller/spr_zeppelin_propeller.yy",},},
     {"id":{"name":"spr_zeppelin","path":"sprites/spr_zeppelin/spr_zeppelin.yy",},},
-    {"id":{"name":"Sprite83","path":"sprites/Sprite83/Sprite83.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_level_selector",
-    "path":"sprites/spr_level_selector/spr_level_selector.yy",
+    "name":"spr_button_circular",
+    "path":"sprites/spr_button_circular/spr_button_circular.yy",
   },
   "spriteMaskId":null,
   "visible":true,
